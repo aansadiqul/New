@@ -1,0 +1,49 @@
+﻿<!-- Search Bar -->
+<div class="search-bar">
+    <div class="search-icon">
+        <i class="material-icons">search</i>
+    </div>
+    <input matInput type="text" placeholder="START TYPING...">
+    <div class="close-search">
+        <i class="material-icons">close</i>
+    </div>
+</div> <!-- #END# Search Bar -->
+
+<nav class="navbar">    
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="javascript:void(0);" class="bars"></a>
+            <a routerLink="/app/home" class="navbar-brand" style="padding:1px 15px"><img src="assets/images/logo-1.png" width="100"></a>
+            <a class="pull-right" style="padding-top:10px" (click)="logout()">{{ 'Logout' | localize }}</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <div class="socialicons">
+                <ul>
+                    <li><a target="_blank" href="https://twitter.com/nms_marketing"><img src="assets/images/01.png" /></a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/NeilsonMarketingServices/"><img src="assets/images/02.png" /></a></li>
+                    <li><a target="_blank" href="https://www.linkedin.com/company/1415806"><img src="assets/images/03.png" /></a></li>
+                    <li><a target="_blank" href="https://neilson-marketing-services.business.site/"><img src="assets/images/04.png" /></a></li>
+                    <li><a target="_blank" href="https://www.youtube.com/channel/UCmRdxq3CLC3r-Oz8vC5pT8Q"><img src="assets/images/05.png" /></a></li>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                
+                <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                <topbar-languageswitch></topbar-languageswitch>-->
+                <!--<li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>-->
+                <li style="margin-top:25px">
+                    <span style="color:#2d2c3c;text-transform: capitalize;">{{appSession.user.name}}</span><div class="btn-group user-helper-dropdown" style="box-shadow:none">
+                        <i class="material-icons" style="color:#2d2c3c;padding-top:3px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a [routerLink]="['/app/update-password']"><i class="material-icons">lock</i>Update Password</a></li>
+                            <li><a (click)="logout()"><i class="material-icons">input</i>{{ 'Logout' | localize }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li style="margin-top:7px"><a (click)="logout()">{{ 'Logout' | localize }}</a></li>
+                <li class="pull-right"><a href="javascript:void(0);">Hi, {{appSession.user.name}}&nbsp;&nbsp;&nbsp;<img src="assets/images/user.png" width="35" class="img-circle" /></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

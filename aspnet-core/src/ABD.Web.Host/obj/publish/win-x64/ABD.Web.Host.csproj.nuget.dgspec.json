@@ -1,0 +1,477 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Host\\ABD.Web.Host.csproj": {}
+  },
+  "projects": {
+    "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Application\\ABD.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Application\\ABD.Application.csproj",
+        "projectName": "ABD.Application",
+        "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Application\\ABD.Application.csproj",
+        "packagesPath": "C:\\Users\\Satata\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Satata\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\ABD.Core.csproj": {
+                "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\ABD.Core.csproj"
+              },
+              "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\ABD.EntityFrameworkCore.csproj": {
+                "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\ABD.EntityFrameworkCore.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "DinkToPdf": {
+              "target": "Package",
+              "version": "[1.0.8, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.6.22, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            }
+          },
+          "imports": [
+            "portable-net45+win8+wp8+wpa81",
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    },
+    "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\ABD.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\ABD.Core.csproj",
+        "projectName": "ABD.Core",
+        "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\ABD.Core.csproj",
+        "packagesPath": "C:\\Users\\Satata\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Satata\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Abp.AutoMapper": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Abp.ZeroCore.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Castle.Windsor.MsDependencyInjection": {
+              "target": "Package",
+              "version": "[3.3.1, )"
+            },
+            "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "portable-net45+win8+wp8+wpa81",
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    },
+    "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\ABD.EntityFrameworkCore.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\ABD.EntityFrameworkCore.csproj",
+        "projectName": "ABD.EntityFrameworkCore",
+        "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\ABD.EntityFrameworkCore.csproj",
+        "packagesPath": "C:\\Users\\Satata\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Satata\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\ABD.Core.csproj": {
+                "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Core\\ABD.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "portable-net45+win8+wp8+wpa81",
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    },
+    "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Core\\ABD.Web.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Core\\ABD.Web.Core.csproj",
+        "projectName": "ABD.Web.Core",
+        "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Core\\ABD.Web.Core.csproj",
+        "packagesPath": "C:\\Users\\Satata\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Satata\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Application\\ABD.Application.csproj": {
+                "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Application\\ABD.Application.csproj"
+              },
+              "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\ABD.EntityFrameworkCore.csproj": {
+                "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.EntityFrameworkCore\\ABD.EntityFrameworkCore.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Abp.AspNetCore": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Abp.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Abp.HangFire.AspNetCore": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "Abp.MailKit": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "Abp.RedisCache": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "Abp.ZeroCore": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Hangfire.SqlServer": {
+              "target": "Package",
+              "version": "[1.6.22, )"
+            },
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "System.ValueTuple": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            }
+          },
+          "imports": [
+            "portable-net45+win8+wp8+wpa81",
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    },
+    "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Host\\ABD.Web.Host.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Host\\ABD.Web.Host.csproj",
+        "projectName": "ABD.Web.Host",
+        "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Host\\ABD.Web.Host.csproj",
+        "packagesPath": "C:\\Users\\Satata\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Host\\obj\\publish\\win-x64\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Satata\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Core\\ABD.Web.Core.csproj": {
+                "projectPath": "F:\\Projects\\ABD\\ABD\\aspnet-core\\src\\ABD.Web.Core\\ABD.Web.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Abp.Castle.Log4Net": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Abp.RedisCache": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "Castle.LoggingFacility.MsLogging": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "DinkToPdf": {
+              "target": "Package",
+              "version": "[1.0.8, )"
+            },
+            "Microsoft.AspNetCore.Diagnostics": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Server.IISIntegration": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "Microsoft.AspNetCore.Server.Kestrel": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.StaticFiles": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.6, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.BrowserLink": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.1, )"
+            }
+          },
+          "imports": [
+            "portable-net45+win8+wp8+wpa81",
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

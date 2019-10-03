@@ -1,0 +1,25 @@
+<div class="overlay"></div>
+
+<top-bar></top-bar>
+
+<section (window:resize)="onResize($event)">
+    <aside id="leftsidebar" class="sidebar">
+        <!--<sidebar-user-area></sidebar-user-area>-->
+        <div style="background:#292A3C;padding:15px;">
+            <a href="#"><img  src="assets/images/logomain.png" width="125" /></a>
+            <a href="javascript:void(0);" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true" class="pull-right" style="margin-top:20px;"><img  src="assets/images/menuslide.png" width="30" /></a>
+        </div>
+       
+        <sidebar-nav></sidebar-nav>
+       
+    </aside>
+
+    <right-sidebar></right-sidebar>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
+    <sidebar-footer></sidebar-footer>
+</section>

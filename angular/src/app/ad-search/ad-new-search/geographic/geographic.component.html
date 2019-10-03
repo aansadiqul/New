@@ -1,0 +1,174 @@
+<div [formGroup]="geographicForm" #geo="ngForm">
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>States</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-radio-group formControlName="Country" name="Country" aria-label="Select an option">
+                <mat-radio-button value="USA" (change)="countryChange($event)">United States</mat-radio-button>
+                <mat-radio-button value="CANADA" (change)="countryChange($event)">Canada</mat-radio-button>
+            </mat-radio-group>
+            <div style="margin-top:10px;margin-bottom:400px">
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>States</h5>
+                        <angular2-multiselect [data]="states" [settings]="settings" [(ngModel)]="selectedItems"
+                            [ngModelOptions]="{standalone: true}" (onSelect)="onItemSelect($event,'state')"
+                            (onDeSelect)="OnItemDeSelect($event,'state')" (onSelectAll)="onSelectAll($event,'state')"
+                            (onDeSelectAll)="onDeSelectAll(states,'state')"></angular2-multiselect>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Exclude States</h5>
+                        <angular2-multiselect [data]="ExcludeStates" [settings]="settings"
+                            [(ngModel)]="selectedItemsExclude" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'stateEx')" (onDeSelect)="OnItemDeSelect($event,'stateEx')"
+                            (onSelectAll)="onSelectAll($event,'stateEx')"
+                            (onDeSelectAll)="onDeSelectAll(ExcludeStates,'stateEx')">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Counties</mat-panel-title>
+            </mat-expansion-panel-header>
+            <button type="button" (click)="loadCounties()" mat-raised-button color="primary">Load Counties</button>
+            <div style="margin-top:10px;margin-bottom:400px">
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>Counties</h5>
+                        <angular2-multiselect [data]="counties" [settings]="settingsCounties"
+                            [(ngModel)]="selectedCounties" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'county')" (onDeSelect)="OnItemDeSelect($event,'county')"
+                            (onSelectAll)="onSelectAll($event,'county')"
+                            (onDeSelectAll)="onDeSelectAll(counties,'county')">
+                        </angular2-multiselect>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>Counties</h5>
+                        <angular2-multiselect [data]="countiesExclude" [settings]="settingsCounties"
+                            [(ngModel)]="selectedCountiesExclude" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'countyEx')"
+                            (onDeSelect)="OnItemDeSelect($event,'countyEx')"
+                            (onSelectAll)="onSelectAll($event,'countyEx')"
+                            (onDeSelectAll)="onDeSelectAll(countiesExclude,'countyEx')">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Zip Codes</mat-panel-title>
+            </mat-expansion-panel-header>
+            <button type="button" (click)="loadZipCodes()" mat-raised-button color="primary">Load Zip Codes</button>
+            <div style="margin-top:10px;margin-bottom:400px">
+                <div class="row">
+
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>3 Digit Zip Codes </h5>
+                        <angular2-multiselect [data]="zip3digits" [settings]="settingsZip"
+                            [(ngModel)]="selectedZip3digits" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'3digit')" (onDeSelect)="OnItemDeSelect($event,'3digit')"
+                            (onSelectAll)="onSelectAll($event,'3digit')"
+                            (onDeSelectAll)="onDeSelectAll(zip3digits,'3digit')">
+                        </angular2-multiselect>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>5 Digit Zip Codes</h5>
+                        <angular2-multiselect [data]="zip5digits" [settings]="settingsZip"
+                            [(ngModel)]="selectedZip5digits" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'5digit')" (onDeSelect)="OnItemDeSelect($event,'5digit')"
+                            (onSelectAll)="onSelectAll($event,'5digit')"
+                            (onDeSelectAll)="onDeSelectAll(zip5digits,'5digit')">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Exclude Zip Codes</h5>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>3 Digit Zip Codes</h5>
+                        <angular2-multiselect [data]="zip3digitsEx" [settings]="settingsZip"
+                            [(ngModel)]="selectedZip3digitsEx" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'3digitEx')"
+                            (onDeSelect)="OnItemDeSelect($event,'3digitEx')"
+                            (onSelectAll)="onSelectAll($event,'3digitEx')"
+                            (onDeSelectAll)="onDeSelectAll(zip3digitsEx,'3digitEx')">
+                        </angular2-multiselect>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>5 Digit Zip Codes</h5>
+                        <angular2-multiselect [data]="zip5digitsEx" [settings]="settingsZip"
+                            [(ngModel)]="selectedZip5digitsEx" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'5digitEx')"
+                            (onDeSelect)="OnItemDeSelect($event,'5digitEx')"
+                            (onSelectAll)="onSelectAll($event,'5digitEx')"
+                            (onDeSelectAll)="onDeSelectAll(zip5digitsEx,'5digitEx')">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Metro Areas</mat-panel-title>
+            </mat-expansion-panel-header>
+            <button type="button" (click)="loadMetroAreas()" mat-raised-button color="primary">Load Metro Areas</button>
+            <div style="margin-top:10px;margin-bottom:400px">
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>Metro Areas</h5>
+                        <angular2-multiselect [data]="metroAreas" [settings]="settingsMetroAreas"
+                            [(ngModel)]="selectedMetroAreas" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'meto')" (onDeSelect)="OnItemDeSelect($event,'meto')"
+                            (onSelectAll)="onSelectAll($event,'meto')"
+                            (onDeSelectAll)="onDeSelectAll(metroAreas,'meto')">
+                        </angular2-multiselect>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>Exclude Metro Areas</h5>
+                        <angular2-multiselect [data]="metroAreasEx" [settings]="settingsMetroAreas"
+                            [(ngModel)]="selectedMetroAreasEx" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'metoEx')" (onDeSelect)="OnItemDeSelect($event,'metoEx')"
+                            (onSelectAll)="onSelectAll($event,'metoEx')"
+                            (onDeSelectAll)="onDeSelectAll(metroAreasEx,'metoEx')">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="!isAdSearch">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Area Codes</mat-panel-title>
+            </mat-expansion-panel-header>
+            <button type="button" (click)="loadAreaCodes()" mat-raised-button color="primary">Load Metro Areas</button>
+            <div style="margin-top:10px;margin-bottom:400px">
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>Areas Codes</h5>
+                        <angular2-multiselect [data]="areaCodes" [settings]="settingsAreaCodes"
+                            [(ngModel)]="selectedAreaCodes" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'area')" (onDeSelect)="OnItemDeSelect($event,'area')"
+                            (onSelectAll)="onSelectAll($event,'area')"
+                            (onDeSelectAll)="onDeSelectAll(areaCodes,'area')">
+                        </angular2-multiselect>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:10px">
+                        <h5>Exclude Area Codes</h5>
+                        <angular2-multiselect [data]="areaCodesE" [settings]="settingsAreaCodes"
+                            [(ngModel)]="selectedAreaCodesEx" [ngModelOptions]="{standalone: true}"
+                            (onSelect)="onItemSelect($event,'areaEx')" (onDeSelect)="OnItemDeSelect($event,'areaEx')"
+                            (onSelectAll)="onSelectAll($event,'areaEx')"
+                            (onDeSelectAll)="onDeSelectAll(areaCodesEx,'areaEx')">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <button class="btn btn-primary" type="button" (click)="reset()">Geo</button>
+</div>

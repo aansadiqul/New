@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <RootNamespace>ABD</RootNamespace>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20180726102624_Upgrade_ABP_380.cs" />
+    <Compile Remove="Migrations\20180927062408_test.cs" />
+    <Compile Remove="Migrations\20190111071724_Upgraded_To_Abp_v4_1_0.cs" />
+    <Compile Remove="Migrations\20190318145509_Added_Entities.cs" />
+    <Compile Remove="Migrations\20190318145638_Added_Entities.cs" />
+    <Compile Remove="Migrations\20190319134529_Update_PricingRules.cs" />
+    <Compile Remove="Migrations\20190319135152_Update_PricingRules.cs" />
+    <Compile Remove="Migrations\20190319135628_Update_PricingRules.cs" />
+    <Compile Remove="Migrations\20190320090524_SubscriptionPlan_Added.cs" />
+    <Compile Remove="Migrations\20190325073341_Entities_Added.cs" />
+    <Compile Remove="Migrations\20190416102530_Unique_Key_Added.cs" />
+    <Compile Remove="Migrations\20190416103553_Unique_Key_Added.cs" />
+    <Compile Remove="Migrations\20190424060450_Rename_Common_ClassName.cs" />
+    <Compile Remove="Migrations\20190425110549_ADSearch_Modified.cs" />
+    <Compile Remove="Migrations\20190425134204_QueryId_ChangedTo_Int.cs" />
+    <Compile Remove="Migrations\20190425134343_QueryID_ChangedTo_Int.cs" />
+    <Compile Remove="Migrations\20190425141106_QueryID_ChangedTo_Int.cs" />
+    <Compile Remove="Migrations\20190621134450_Record_Table_Updated.cs" />
+    <Compile Remove="Migrations\20190708104125_IL_Purchased_Modified.cs" />
+    <Compile Remove="Migrations\20190809062534_SubscriptionPlan_Modified.cs" />
+    <Compile Remove="Migrations\20190809063049_AccessLevel_Added.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ABD.Core\ABD.Core.csproj" />
+  </ItemGroup>
+</Project>

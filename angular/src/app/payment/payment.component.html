@@ -1,0 +1,83 @@
+<div class="row clearfix" [@routerTransition]>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row" style="margin-right: -30px;margin-left: -30px;">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px;padding-left:0px;padding-right:0px">
+              <mat-dialog-content>
+                  <div style="float:left;font-size:20px;margin-left:30px;position:absolute">Payments</div>
+                  <mat-tab-group mat-align-tabs="end" >
+                  <mat-tab  [label]="'Payments'" ></mat-tab>
+                  </mat-tab-group>
+              </mat-dialog-content>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color:#E4E4EC;padding: 25px 30px 0px 30px;">
+              <form>
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                              <input class="form-control" style="border-radius:1.3em;padding:20px 30px;border:none;" placeholder="Filter" [(ngModel)]="keyword" name="keyword">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+                          </div>
+                      </div>
+
+                  </div>
+              </form>
+          </div>
+    </div>
+    <div style="margin-top:10px">&nbsp;</div>
+    <div class="card main-content">
+      <div class="body table-responsive">
+        <table class="table table-hover table-striped" [busy]="isTableLoading">
+          <thead>
+            <tr>
+              <th>{{ "Payment Id"}}</th>
+              <th>{{ "Date" }}</th>
+              <th>{{ "Order Type" }}</th>
+              <th>{{ "Order Amount" }}</th>
+              <th>{{ "Payment Type" }}</th>
+              <th>{{ "Transaction Id"}}</th>
+              <th>{{ "Customer Name"}}</th>
+              <th>{{ "Company Name"}}</th>
+              <th>{{ "Musked Credit Card"}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="
+              let payment of (payments
+                | paginate
+                  : {
+                      id: 'server',
+                      itemsPerPage: pageSize,
+                      currentPage: pageNumber,
+                      totalItems: totalItems
+                    })
+            ">
+              <td>{{ payment.id }}</td>
+              <td>{{ payment.creationTime | date: 'dd/MM/yyyy'}}</td>
+              <td>{{ payment.orderType.name }}</td>
+              <td>{{ payment.orderAmount }}</td>
+              <td>{{ payment.paymentType.name }}</td>
+              <td>{{ payment.transactionId }}</td>
+              <td>{{ payment.customerName }}</td>
+              <td>{{ payment.companyName }}</td>
+              <td>{{ payment.creditCardMusked }}</td>
+              <td>
+                  <button mat-button (click)="onClick(payment.id, payment.orderType.id)">
+                    <mat-icon>receipt</mat-icon>View Receipt
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
+          <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
+          </abp-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

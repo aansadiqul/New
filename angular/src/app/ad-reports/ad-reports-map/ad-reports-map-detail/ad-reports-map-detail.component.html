@@ -1,0 +1,59 @@
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div>&nbsp;</div>
+    <mat-card>
+      <mat-card-title>Location Details</mat-card-title>
+      <mat-divider></mat-divider>
+      <div style="line-height:23px;margin-top:20px">
+          <div>Account: 	{{agencyDto.account}} </div>
+          <div>Address: 	{{agencyDto.address1}} </div>
+          <div>{{agencyDto.address2}} </div>
+          <div>City: 	{{agencyDto.city}} </div>
+          <div>State: 	{{agencyDto.state}} </div>
+          <div>Zip: 	{{agencyDto.postalCode}} </div>
+          <div>Web: 	{{agencyDto.webAddress}} </div>
+          <div>Phone: 	{{agencyDto.mainPhone}} </div>
+          <div>First Name: {{agencyDto.firstName}} </div>
+          <div>Last Name: 	{{agencyDto.lastName}} </div>
+          <div>Email: 	{{agencyDto.email}} </div>
+          <div>Employees 	{{agencyDto.employees}} </div>
+          <div>Revenue: 	${{agencyDto.revenue}} </div>
+          <div>Premium Volume: 	${{agencyDto.premiumVolume}} </div>
+      </div>      
+     </mat-card>
+     <div>&nbsp;</div>
+      <div *ngIf="targets.length > 0" style="line-height:23px;">
+          <mat-card>
+            <mat-card-title >Target Sectors</mat-card-title>   
+            <mat-divider></mat-divider>  
+            <div>&nbsp;</div>     
+            <div *ngFor="let targetsector of targets" >
+                {{targetsector.description}}
+            </div>
+          </mat-card> 
+          <div>&nbsp;</div>
+      </div>     
+      <div *ngIf="affiliations.length > 0" style="line-height:23px;">
+          <mat-card>
+            <mat-card-title >Affiliations</mat-card-title>
+            <mat-divider></mat-divider>
+            <div>&nbsp;</div>
+            <div *ngFor="let affiliation of affiliations" >
+                {{affiliation.description}}
+            </div>
+        </mat-card>
+        <div>&nbsp;</div>
+      </div>
+      <div *ngIf="carriers.length > 0" style="line-height:23px">
+        <mat-card>
+          <mat-card-title >Carriers</mat-card-title>
+          <mat-divider></mat-divider>
+          <div>&nbsp;</div>
+          <div *ngFor="let carrier of carriers">
+              {{carrier.companyLine}}
+          </div>
+        </mat-card>
+        <div>&nbsp;</div>
+      </div>
+  </div>
+</div>

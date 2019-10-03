@@ -1,0 +1,31 @@
+<div style="position:fixed;z-index:9999;left:50%;top:30%" *ngIf="saving">
+  <mat-spinner></mat-spinner>
+</div>
+<div style="overflow-x:scroll;max-height:800px;overflow-y:scroll">
+  <div *ngIf="ErrorMsg" style="color:red">[ {{ErrorMsg}} ]</div>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+    <ng-container matColumnDef="AccountId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+          ACCOUNTID </th>
+        <td mat-cell *matCellDef="let row"> {{row.AccountId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Account">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+          ACCOUNT </th>
+        <td mat-cell *matCellDef="let row"> {{row.Account}} </td>
+    </ng-container>
+    <ng-container matColumnDef="SicCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+        SICCODE</th>
+      <td mat-cell *matCellDef="let row"> {{row.SicCode}} </td>
+   </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+</table>               
+<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>
+

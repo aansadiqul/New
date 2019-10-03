@@ -1,0 +1,94 @@
+<div [formGroup]="companyForm">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        Company Size
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-md-4 text-right">
+          Employee Count
+        </div>
+        <div class="col-md-3">
+
+          <input class="form-control form-group" name="EmployeesFrom" formControlName="EmployeesFrom" numbersOnly [placeholder]="'From'"
+            maxlength="32" />
+
+        </div>
+        <div class="col-md-3">
+
+          <input class="form-control form-group" name="EmployeesTo" formControlName="EmployeesTo" numbersOnly [placeholder]="'To'" maxlength="32" />
+
+        </div>
+        <div class="col-md-2">
+          <mat-radio-group formControlName="CompanyAndOr" aria-label="Select an option">
+            <mat-radio-button value="AND">AND</mat-radio-button>
+            <mat-radio-button value="OR" [checked]="true">OR</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div class="row">
+        <div class="col-md-4 text-right">
+          Annual Sales (.1 = $100,000)<a href="javascript:void()" data-toggle="modal" data-target="#helpModal"><i
+              class="material-icons">help</i></a>
+        </div>
+        <div class="col-md-3">
+
+          <input class="form-control form-group" numbersOnly name="SalesFrom" formControlName="SalesFrom"
+            [placeholder]="'From'" maxlength="32" />
+
+        </div>
+        <div class="col-md-3">
+
+          <input class="form-control" numbersOnly formControlName="SalesTo" name="SalesTo" [placeholder]="'To'"
+            maxlength="32" />
+
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Sites
+      </mat-expansion-panel-header>
+      <div style="padding:15px 20px;background-color:#fff">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Site Location</h5>
+            <div style="margin-top:10px" *ngFor="let site of siteList;">
+              <mat-checkbox [checked]="site.isChecked"
+              (change)="onChangeSite(site.name, $event)">{{site.name}}
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5>Manufacturing Sites</h5>
+            <div style="margin-top:10px" *ngFor="let manufacturing of manufacturingList;">
+                <mat-checkbox [checked]="manufacturing.isChecked"
+                (change)="onChangeManufacture(manufacturing.name, $event)">{{manufacturing.name}}
+                </mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Search by Company Name
+      </mat-expansion-panel-header>
+      <div calss="row">
+        <div class="col-md-6">
+
+          <input class="form-control form-group" formControlName="CompanyName" name="Company" [placeholder]="'Company Name'"
+            maxlength="100" />
+
+        </div>
+        <div class="col-md-6">
+          <mat-radio-group formControlName="CompanyBeginsContains" aria-label="Select an option">
+            <mat-radio-button value="Begins" [checked]="true">Begins</mat-radio-button>
+            <mat-radio-button value="Contains">Contains</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

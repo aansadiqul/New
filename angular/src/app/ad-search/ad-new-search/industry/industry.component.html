@@ -1,0 +1,42 @@
+<div  [formGroup]="industryForm">
+    <div style="position:fixed;z-index:9999;left:55%;top:20%" *ngIf="show"><mat-spinner></mat-spinner></div>
+  <div  style="background-color:#fff;padding:20px;">
+    <h5>Industry</h5>
+    <div class="row">
+      <div class="col-md-4">
+            <input class="form-group form-control" #reference id="searchkey" placeholder="Search" (input)="changeSearchText($event.target.value)" >
+      </div>
+      <div class="col-md-4">
+            <button  type="button" [disabled]="!searchText" (click)="filterChanged()" mat-raised-button color="primary">Search</button>
+            &nbsp;<button  type="button" (click)="clearfilter();reference.value=''" mat-raised-button color="primary">Reset</button>
+      </div>
+      <div class="col-md-4">
+          <div style="margin-bottom:10px">Import SIC codes</div>
+          <label class="btn btn-success" style="border-radius: 2em;padding: 8px 19px;background-color: #4CAF50;"><input type="file" (change)="incomingfile($event)" style="display:none;"  placeholder="Import SIC Code (.xlsx)" accept=".xlsx"> Import SIC Code (.xlsx)</label>
+      </div>
+
+    </div>
+    <div>
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+          <button mat-icon-button disabled type="button"></button>
+          <mat-checkbox class="checklist-leaf-node"
+                        [checked]="checklistSelection.isSelected(node)"
+                        (change)="todoLeafItemSelectionToggle(node)">{{node.text}}</mat-checkbox>
+        </mat-tree-node>
+
+        <mat-tree-node  *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+          <button mat-icon-button matTreeNodeToggle type="button"
+                  [attr.aria-label]="'toggle ' + node.filename">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'remove_circle' : 'add_circle'}}
+            </mat-icon>
+          </button>
+          <mat-checkbox  [matTooltip]="node.sicid" [checked]="descendantsAllSelected(node)"
+                        [indeterminate]="descendantsPartiallySelected(node)"
+                        (change)="todoItemSelectionToggle(node)">{{node.text}}</mat-checkbox>
+        </mat-tree-node>
+      </mat-tree>
+    </div>
+  </div>
+</div>

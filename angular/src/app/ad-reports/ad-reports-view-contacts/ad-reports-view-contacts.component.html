@@ -1,0 +1,335 @@
+<div style="position:fixed;z-index:9999;left:50%;top:30%" *ngIf="saving">
+  <mat-spinner></mat-spinner>
+</div>
+<div style="overflow-x:scroll;max-height:800px;overflow-y:scroll">
+  <div *ngIf="ErrorMsg" style="color:red">[ {{ErrorMsg}} ]</div>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+    <ng-container matColumnDef="Account">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+          ACCOUNT </th>
+        <td mat-cell *matCellDef="let row"> {{row.Account}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Address1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+          ADDRESS1 </th>
+        <td mat-cell *matCellDef="let row"> {{row.Address1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Address2">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+        ADDRESS2</th>
+      <td mat-cell *matCellDef="let row"> {{row.Address2}} </td>
+   </ng-container>
+   <ng-container matColumnDef="City">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      CITY</th>
+    <td mat-cell *matCellDef="let row"> {{row.City}} </td>
+  </ng-container>
+  <ng-container matColumnDef="State">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      STATE</th>
+    <td mat-cell *matCellDef="let row"> {{row.State}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="PostalCode">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      POSTALCODE</th>
+    <td mat-cell *matCellDef="let row"> {{row.PostalCode}} </td>
+  </ng-container>
+  <ng-container matColumnDef="County">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      COUNTY</th>
+    <td mat-cell *matCellDef="let row"> {{row.County}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="TimeZone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      TIMEZONE</th>
+    <td mat-cell *matCellDef="let row"> {{row.TimeZone}} </td>
+  </ng-container>  
+  <ng-container matColumnDef="Country">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      COUNTRY</th>
+    <td mat-cell *matCellDef="let row"> {{row.Country}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="MainPhone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      MAINPHONE</th>
+    <td mat-cell *matCellDef="let row"> {{row.MainPhone}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="PhoneExtension">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      PHONEEXTENSION</th>
+    <td mat-cell *matCellDef="let row"> {{row.PhoneExtension}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="Fax">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      FAX</th>
+    <td mat-cell *matCellDef="let row"> {{row.Fax}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="TollFree">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      TOLLFREE</th>
+    <td mat-cell *matCellDef="let row"> {{row.TollFree}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="WebAddress">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      WEBADDRESS</th>
+    <td mat-cell *matCellDef="let row"> {{row.WebAddress}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="Email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      EMAIL</th>
+    <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="Type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      TYPE</th>
+    <td mat-cell *matCellDef="let row"> {{row.Type}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="Revenue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      REVENUE</th>
+    <td mat-cell *matCellDef="let row"> {{row.Revenue}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="PercentComm">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      PERCENTCOMM</th>
+    <td mat-cell *matCellDef="let row"> {{row.PercentComm}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Employees">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      EMPLOYEES</th>
+    <td mat-cell *matCellDef="let row"> {{row.Employees}} </td>
+  </ng-container>
+  <ng-container matColumnDef="SpecialAffiliation">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      SPECIALAFFILIATION</th>
+    <td mat-cell *matCellDef="let row"> {{row.SpecialAffiliation}} </td>
+  </ng-container>
+  <ng-container matColumnDef="AgencyManagement">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      AGENCYMANAGEMENT</th>
+    <td mat-cell *matCellDef="let row"> {{row.AgencyManagement}} </td>
+  </ng-container>
+  <ng-container matColumnDef="LastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      LASTNAME</th>
+    <td mat-cell *matCellDef="let row"> {{row.LastName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="FirstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      FIRSTNAME</th>
+    <td mat-cell *matCellDef="let row"> {{row.FirstName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Suffix">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      SUFFIX</th>
+    <td mat-cell *matCellDef="let row"> {{row.Suffix}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      TITLE</th>
+    <td mat-cell *matCellDef="let row"> {{row.Title}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Mobile">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      MOBILE</th>
+    <td mat-cell *matCellDef="let row"> {{row.Mobile}} </td>
+  </ng-container>
+  <ng-container matColumnDef="CEmail">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      CEMAIL</th>
+    <td mat-cell *matCellDef="let row"> {{row.CEmail}} </td>
+  </ng-container>
+  <ng-container matColumnDef="AccountId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      ACCOUNTID</th>
+    <td mat-cell *matCellDef="let row"> {{row.AccountId}} </td>
+  </ng-container>
+  <ng-container matColumnDef="ContactId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      CONTACTID</th>
+    <td mat-cell *matCellDef="let row"> {{row.ContactId}} </td>
+  </ng-container>
+  <ng-container matColumnDef="IsPrimary">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      ISPRIMARY</th>
+    <td mat-cell *matCellDef="let row"> {{row.IsPrimary}} </td>
+  </ng-container>
+  <ng-container matColumnDef="TitleSearch">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      TITLESEARCH</th>
+    <td mat-cell *matCellDef="let row"> {{row.TitleSearch}} </td>
+  </ng-container>
+  <ng-container matColumnDef="MSA">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      MSA</th>
+    <td mat-cell *matCellDef="let row"> {{row.MSA}} </td>
+  </ng-container>
+  <ng-container matColumnDef="PremiumVolume">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      PREMIUMVOLUME</th>
+    <td mat-cell *matCellDef="let row"> {{row.PremiumVolume}} </td>
+  </ng-container>
+  <ng-container matColumnDef="DunsNum">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      DUNSNUM</th>
+    <td mat-cell *matCellDef="let row"> {{row.DunsNum}} </td>
+  </ng-container>
+  <ng-container matColumnDef="CEmail2">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      CEMAIL2</th>
+    <td mat-cell *matCellDef="let row"> {{row.CEmail2}} </td>
+  </ng-container>
+  <ng-container matColumnDef="LinkedUrl">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      LINKEDURL</th>
+    <td mat-cell *matCellDef="let row"> {{row.LinkedUrl}} </td>
+  </ng-container>
+  <ng-container matColumnDef="BranchIndicator">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      BRANCHINDICATOR</th>
+    <td mat-cell *matCellDef="let row"> {{row.BranchIndicator}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Num_Locations">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      NUM_LOCATIONS</th>
+    <td mat-cell *matCellDef="let row"> {{row.Num_Locations}} </td>
+  </ng-container>
+  <ng-container matColumnDef="TwitterUrl">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      TWITTERURL</th>
+    <td mat-cell *matCellDef="let row"> {{row.TwitterUrl}} </td>
+  </ng-container>
+  <ng-container matColumnDef="FacebookUrl">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      FACEBOOKURL</th>
+    <td mat-cell *matCellDef="let row"> {{row.FacebookUrl}} </td>
+  </ng-container>
+  <ng-container matColumnDef="GoogleplusUrl">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      GOOGLEPLUSURL</th>
+    <td mat-cell *matCellDef="let row"> {{row.GoogleplusUrl}} </td>
+  </ng-container>
+  <ng-container matColumnDef="YoutubeUrl">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      YOUTUBEURL</th>
+    <td mat-cell *matCellDef="let row"> {{row.YoutubeUrl}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Linkedin">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      LINKEDIN</th>
+    <td mat-cell *matCellDef="let row"> {{row.Linkedin}} </td>
+  </ng-container>
+  <ng-container matColumnDef="CountyCode">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+      COUNTYCODE</th>
+    <td mat-cell *matCellDef="let row"> {{row.CountyCode}} </td>
+  </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+</table>               
+<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    <!--<table style="width:100%">
+      <thead>
+        <tr >
+          <th>ACCOUNT</th>
+          <th>ADDRESS1</th>
+          <th>ADDRESS2</th>
+          <th>CITY</th>
+          <th>STATE</th>
+          <th>POSTALCODE</th>
+          <th>COUNTY</th>
+          <th>TIMEZONE</th>
+          <th>COUNTRY</th>
+          <th>DIVISION</th>
+          <th>MAINPHONE</th>
+          <th>PHONEEXTENSION</th>
+          <th>FAX</th>
+          <th>TOLLFREE</th>
+          <th>WEBADDRESS</th>
+          <th>EMAIL</th>
+          <th>TYPE</th>
+          <th>REVENUE</th>
+          <th>PERCENTCOMM</th>
+          <th>EMPLOYEES</th>
+          <th>SPECIALAFFILIATION</th>
+          <th>AGENCYMANAGEMENT</th>
+          <th>FIRSTNAME</th>
+          <th>SUFFIX</th>
+          <th>TITLE</th>
+          <th>MOBILE</th>
+          <th>CEMAIL</th>
+          <th>ACCOUNTID</th>
+          <th>CONTACTID</th>
+          <th>ISPRIMARY</th>
+          <th>TITLESEARCH</th>
+          <th>MSA</th>
+          <th>PREMIUMVOLUME</th>
+          <th>DUNSNUM</th>
+          <th>CEMAIL2</th>
+          <th>LINKEDURL</th>
+          <th>BRANCHINDICATOR</th>
+          <th>NUM_LOCATIONS</th>
+          <th>TWITTERURL</th>
+          <th>FACEBOOKURL</th>
+          <th>GOOGLEPLUSURL</th>
+          <th>YOUTUBEURL</th>
+          <th>LINKEDIN</th>
+          <th>COUNTYCODE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contactJson;">
+          <td>{{contact.Account}}</td>
+          <td>{{contact.Address1}}</td>
+          <td>{{contact.Address2}}</td>
+          <td>{{contact.City}}</td>
+          <td>{{contact.State}}</td>
+          <td>{{contact.PostalCode}}</td>
+          <td>{{contact.County}}</td>
+          <td>{{contact.TimeZone}}</td>
+          <td>{{contact.Country}}</td>
+          <td>{{contact.Division}}</td>
+          <td>{{contact.MainPhone}}</td>
+          <td>{{contact.PhoneExtension}}</td>
+          <td>{{contact.Fax}}</td>
+          <td>{{contact.TollFree}}</td>
+          <td>{{contact.WebAddress}}</td>
+          <td>{{contact.Email}}</td>
+          <td>{{contact.Type}}</td>
+          <td>{{contact.Revenue}}</td>
+          <td>{{contact.PercentComm}}</td>
+          <td>{{contact.Employees}}</td>
+          <td>{{contact.SpecialAffiliation}}</td>
+          <td>{{contact.AgencyManagement}}</td>
+          <td>{{contact.FirstName}}</td>
+          <td>{{contact.Suffix}}</td>
+          <td>{{contact.Title}}</td>
+          <td>{{contact.Mobile}}</td>
+          <td>{{contact.CEmail}}</td>
+          <td>{{contact.AccountId}}</td>
+          <td>{{contact.ContactId}}</td>
+          <td>{{contact.IsPrimary}}
+          <td>{{contact.TitleSearch}}</td>
+          <td>{{contact.Msa}}</td>
+          <td>{{contact.PremiumVolume}}</td>
+          <td>{{contact.DunsNum}}</td>
+          <td>{{contact.CEmail2}}</td>
+          <td>{{contact.LinkedUrl}}</td>
+          <td>{{contact.BranchIndicator}}</td>
+          <td >{{contact.Num_Locations}}</td>
+          <td >{{contact.TwitterUrl}}</td>
+          <td >{{contact.FacebookUrl}}</td>
+          <td >{{contact.GoogleplusUrl}}</td>
+          <td >{{contact.YoutubeUrl}}</td>
+          <td >{{contact.Linkedin}}</td>
+          <td >{{contact.CountyCode}}</td>
+        </tr>
+      </tbody>
+    </table>-->
+  </div>

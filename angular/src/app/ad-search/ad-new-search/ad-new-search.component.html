@@ -1,0 +1,457 @@
+<!--<div class="row clearfix" [@routerTransition]>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card main-content">
+         <div class="body table-responsive">-->
+<div style="position:fixed;z-index:9999;left:50%;top:30%" *ngIf="saving">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div>&nbsp;</div>
+        <form autocomplete="off" novalidate [formGroup]="adForm" (ngSubmit)="save()">
+            <h1 mat-dialog-title style="margin-top: 0px">{{this.heading}}</h1>
+
+            <mat-dialog-content>
+                <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedIndexChange)="tabChange($event)">
+                    <mat-tab [label]="'Company'">
+                        <br />
+                        <app-company (formReady)="formInitialized('company', $event)"></app-company>
+                    </mat-tab>
+
+                    <mat-tab [label]="'Geographic'">
+                        <br />
+                        <app-geographic [isAdSearch]="true" (formReady)="formInitialized('geographic', $event)">
+                        </app-geographic>
+                    </mat-tab>
+                    <mat-tab [label]="'Carriers'">
+                        <br />
+                        <div *ngIf="CarrierTabShow">
+                            <app-carriers (formReady)="formInitialized('carrier', $event)"></app-carriers>
+                        </div>
+                    </mat-tab>
+                    <mat-tab [label]="'Affiliations'">
+                        <br />
+                        <app-affiliations (formReady)="formInitialized('affiliation', $event)"></app-affiliations>
+                    </mat-tab>
+                    <mat-tab [label]="'Contacts'">
+                        <br />
+                        <app-contacts (formReady)="formInitialized('contact', $event)"></app-contacts>
+                    </mat-tab>
+                    <mat-tab [label]="'Industry'">
+                        <br />
+                        <div *ngIf="IndustryTabShow">
+                            <app-industry (formReady)="formInitialized('industry', $event)"></app-industry>
+                        </div>
+                    </mat-tab>
+                    <mat-tab [label]="'Get Count'">
+                        <br />
+
+                        <div style="background-color:#fff;padding:20px;">
+                            <div class="row">
+                                <div class="col-md-8">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div>
+                            <mat-card>
+                                <mat-card-title>
+                                    Search Name
+                                </mat-card-title>
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input formControlName="QueryName" class="form-control"
+                                                (keyup)="changeQueryName($event)" [value]="cDate" id="savesearch"
+                                                placeholder="Save Search">
+                                            <i style="font-size:10px">You can rename the Search before purchasing.</i>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button (click)="saveSearch();" type="button" mat-raised-button
+                                                color="primary"><i style="font-size:18px" class="material-icons">
+                                                    save
+                                                </i> Save Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-divider></mat-divider>
+                            <mat-card>
+                                <mat-card-title>
+                                    Records Available
+                                </mat-card-title>
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table">
+                                                <thead class="thead-red">
+                                                    <tr>
+                                                        <th>Record Type</th>
+                                                        <th>Count</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Agency List</td>
+                                                        <td>{{adCounts.agencyListCount}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Contacts</td>
+                                                        <td>{{adCounts.adContactsCount}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Contacts with Email</td>
+                                                        <td>{{adCounts.adEmailCount}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><button style="margin-bottom:10px;"
+                                                                type="button" mat-raised-button color="primary"
+                                                                (click)="onPurchaseAgencyClick()"><i
+                                                                    class="material-icons">
+                                                                    shopping_cart
+                                                                </i> Purchase Agency Records</button>
+                                                            &nbsp;<button type="button" mat-raised-button
+                                                                color="primary" (click)="onPurchaseContactsClick()"
+                                                                style="margin-bottom:10px;background-color:#2C2E3D;"><i
+                                                                    class="material-icons">
+                                                                    shopping_cart
+                                                                </i> Purchase Agencies & Contacts</button> </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-divider></mat-divider>
+                            <mat-card>
+                                <mat-card-title>
+                                    Analyze via Breakdown
+                                </mat-card-title>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <select (change)="onChangeBrk1($event.target.value)" id="cmbAnalyzeList1"
+                                            name="firstValue" class="form-group form-control">
+                                            <option value="">Select</option>
+                                            <option Value="STATE">State</option>
+                                            <option value="COUNTY">County</option>
+                                            <option value="POSTALCODE">Zip Codes</option>
+                                            <option value="MSA">Metro Area</option>
+                                            <option value="substring(SICCODE,1,2)">2 Digit SIC</option>
+                                            <option value="substring(SICCODE,1,4)">4 Digit SIC</option>
+                                            <option value="substring(SICCODE,1,6)">6 Digit SIC</option>
+                                            <option value="SICCODE">8 Digit SIC</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select (change)="onChangeBrk2($event.target.value)" id="cmbAnalyzeList2"
+                                            name="secondValue" class="form-group form-control">
+                                            <option value="">Select</option>
+                                            <option Value="STATE">State</option>
+                                            <option value="COUNTY">County</option>
+                                            <option value="POSTALCODE">Zip Codes</option>
+                                            <option value="MSA">Metro Area</option>
+                                            <option value="substring(SICCODE,1,2)">2 Digit SIC</option>
+                                            <option value="substring(SICCODE,1,4)">4 Digit SIC</option>
+                                            <option value="substring(SICCODE,1,6)">6 Digit SIC</option>
+                                            <option value="SICCODE">8 Digit SIC</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button data-toggle="modal" data-target="#analyzeModal"
+                                            (click)="getAnalyzedData()" type="button" mat-raised-button color="primary"
+                                            style="background-color:#2C2E3D;"><i class="material-icons">
+                                                swap_horiz
+                                            </i> Analyze
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-card>
+                            <mat-divider></mat-divider>
+                            <mat-card>
+                                <mat-card-title>
+                                    Search Summary
+                                </mat-card-title>
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table">
+                                                <thead class="thead-red">
+                                                    <tr>
+                                                        <th>Page</th>
+                                                        <th>Criteria</th>
+                                                        <th>Value</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let summary of searchSummary;">
+                                                        <td>{{summary.page}}</td>
+                                                        <td>{{summary.criteria}}</td>
+                                                        <td>{{summary.value}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!-- <button (click)="fun()">fafa</button> -->
+
+                                        </div>
+
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+            </mat-dialog-content>
+            <div *ngIf="showCountButton"
+                style="background-color:#fff;padding:5px 20px;border-top:2px solid #f4f5f8;margin-bottom:10px">
+                <div>&nbsp;</div>
+                <div class="row">
+                    <div class="col-md-6"><button mat-stroked-button>Clear Search</button></div>
+                    <div class="col-md-6 text-right"><button style="background-color:#4CAF50" mat-raised-button
+                            color="accent">GET COUNT</button></div>
+                </div>
+                <div>&nbsp;</div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--</div>
+    </div>
+  </div>
+</div>-->
+<div class="modal fade" id="analyzeModal" tabindex="-1" role="dialog" aria-labelledby="analyzeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agency Directory - Analyze via Breakdown</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select [value]="this.selectedBreakdown1" (change)="onChangeBrk1($event.target.value)"
+                            id="cmbAnalyzeList3" name="firstValue" class="form-group form-control">
+                            <option value="">Select</option>
+                            <option Value="STATE">State</option>
+                            <option value="COUNTY">County</option>
+                            <option value="POSTALCODE">Zip Codes</option>
+                            <option value="MSA">Metro Area</option>
+                            <option value="substring(SICCODE,1,2)">2 Digit SIC</option>
+                            <option value="substring(SICCODE,1,4)">4 Digit SIC</option>
+                            <option value="substring(SICCODE,1,6)">6 Digit SIC</option>
+                            <option value="SICCODE">8 Digit SIC</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select [value]="this.selectedBreakdown2" (change)="onChangeBrk2($event.target.value)"
+                            id="cmbAnalyzeList4" name="secondValue" class="form-group form-control">
+                            <option value="">Select</option>
+                            <option Value="STATE">State</option>
+                            <option value="COUNTY">County</option>
+                            <option value="POSTALCODE">Zip Codes</option>
+                            <option value="MSA">Metro Area</option>
+                            <option value="substring(SICCODE,1,2)">2 Digit SIC</option>
+                            <option value="substring(SICCODE,1,4)">4 Digit SIC</option>
+                            <option value="substring(SICCODE,1,6)">6 Digit SIC</option>
+                            <option value="SICCODE">8 Digit SIC</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button (click)="getAnalyzedData()" [disabled]="!isAnalyze" type="button" mat-raised-button
+                            color="primary" style="background-color:#2C2E3D;"><i class="material-icons">
+                                swap_horiz
+                            </i> Analyze
+                        </button>
+                    </div>
+                </div>
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+
+                <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+                    <ng-container matColumnDef="firstValue">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+                            {{selectedBreakdown1}} </th>
+                        <td mat-cell *matCellDef="let row"> {{row.firstValue}} </td>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="secondValue">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-transform: uppercase">
+                            {{selectedBreakdown2}} </th>
+                        <td mat-cell *matCellDef="let row"> {{row.secondValue}} </td>
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="description">
+                        <!--*ngIf="hasSicCode"-->
+                        <th [style.display]="hasSicCode ? '' : 'none'" mat-header-cell *matHeaderCellDef
+                            mat-sort-header> Description </th>
+                        <td [style.display]="hasSicCode ? '' : 'none'" mat-cell *matCellDef="let row">
+                            {{row.description}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="records">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Records </th>
+                        <td mat-cell *matCellDef="let row"> {{row.records}} </td>
+                    </ng-container>
+
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel">Annual Sales Dollars Guide</h5>
+            </div>
+            <div class="modal-body">
+                <table border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#0759A3">
+                    <tbody>
+                        <tr>
+                            <td bgcolor="#FFFFFF">
+                                How do I enter?
+                                <table width="100%" cellpadding="3" cellspacing="1" bgcolor="#63B1F8"
+                                    style="font-weight: bold">
+                                    <tbody>
+                                        <tr>
+                                            <td width="41%" align="center"
+                                                style="color: white; background-color: #63B1F8">
+                                                If you want </td>
+                                            <td width="15%" align="center"
+                                                style="color: white; background-color: #63B1F8">&nbsp; </td>
+                                            <td width="44%" align="center"
+                                                style="color: white; background-color: #63B1F8">
+                                                Enter </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                100,000 </td>
+                                            <td align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left"><strong>.</strong>1 </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                1,000,000 </td>
+                                            <td align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left">1 </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                1,500,000 </td>
+                                            <td align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left">1<strong>.</strong>5 </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                10,000,000 </td>
+                                            <td align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left">10 </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                100,000,000 </td>
+                                            <td align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left">100 </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                1,000,000,000 </td>
+                                            <td align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left">1000 </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#FFFFFF">
+                                Examples of custom ranges :
+                                <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#63B1F8"
+                                    style="font-weight: bold">
+                                    <tbody>
+                                        <tr>
+                                            <td width="155" align="right" bgcolor="#FFFFFF">
+                                                <div align="left">From .1 to .9 </div>
+                                            </td>
+                                            <td width="53" align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td width="170" align="left" bgcolor="#FFFFFF">
+                                                100,000 to 900,000 </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left">From 1.0 to 2.5 </div>
+                                            </td>
+                                            <td align="center" bgcolor="#FFFFFF" size="12px">
+                                                = </td>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                1,000,000 to 2,500,000 </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" bgcolor="#FFFFFF">
+                                                <div align="left">From .1 to 20 </div>
+                                            </td>
+                                            <td align="center" bgcolor="#FFFFFF">
+                                                = </td>
+                                            <td align="left" bgcolor="#FFFFFF">
+                                                100,000 to 20,000,000 </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#FFFFFF">
+                                To find 5 million or more enter from 5 to all or from 5 to blank.
+                                <br> To find 100 million enter from 100 to 100.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-primary" type="button" (click)="fun()">Click Me</button>

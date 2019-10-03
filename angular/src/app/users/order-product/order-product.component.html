@@ -1,0 +1,110 @@
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div>&nbsp;</div>
+    <h4>Agency Directory : Order Product</h4>
+    <form
+      autocomplete="off"
+      novalidate
+      [formGroup]="orderForm"
+      (ngSubmit)="save()"
+    >
+      <mat-card>
+        <!-- <div class="row">
+              <div class="col-md-12">
+                  <mat-radio-group aria-label="Select an option" name="userRole"   formControlName="userRole">
+                    <mat-radio-button *ngFor="let role of roleNames" (click)="getSubscriptionType(role.id)" [value]="role.name">{{role.name}}</mat-radio-button>
+                  </mat-radio-group>
+              </div>
+          </div>
+          <div>&nbsp;</div> -->
+        <mat-card-title>Select your Product : </mat-card-title>
+      </mat-card>
+      <div *ngIf="isAdORBd">
+        <div>&nbsp;</div>
+        <div class="row">
+          <div
+            class="col-md-3 text-center"
+            *ngFor="let orderTtype of adOrderTypesTotal"
+          >
+            <mat-card style="height: 100;">
+              <label>
+                <input
+                  type="radio"
+                  name="amount"
+                  formControlName="amount"
+                  class="card-input-element"
+                  [value]="orderTtype.amount"
+                  (change)="getChekedOption(orderTtype.id)"
+                />
+                <div class="card-input">
+                  <div>
+                    <i
+                      style="font-size: 50px;color:#C2141C"
+                      class="material-icons"
+                      >shopping_cart</i
+                    >
+                  </div>
+                  <h3>${{ orderTtype.amount }}</h3>
+                  <h4>{{ orderTtype.typeName }}</h4>
+                </div>
+              </label>
+            </mat-card>
+          </div>
+        </div>
+        <div>&nbsp;</div>
+
+        <!-- <div>
+          <mat-card>
+            <div>
+              <mat-card-title>Order Options : </mat-card-title>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Override Months:</label>
+                  <input
+                    id="month"
+                    numbersOnly
+                    name="overridemonth"
+                    formControlName="overridemonth"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label>Override Amount:</label>
+                  <input
+                    id="amount"
+                    numbersOnly
+                    name="overrideamount"
+                    formControlName="overrideamount"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div> -->
+      </div>
+      <div *ngIf="!isAdORBd">
+        <div>&nbsp;</div>
+        <mat-card>
+          <mat-card-title>Product Details </mat-card-title>
+          Product: Business Directory<br />
+          Subscription: Perpetual<br />
+          Amount: Free Membership<br /><br />
+          Signing up for Business Directory is free.<br />
+          You only pay for the records you decide to puchase.<br /><br />
+
+          Please click on submit to Complete the Signup process.
+        </mat-card>
+        <div>&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>&nbsp;</label>
+          <button type="submit" mat-raised-button color="primary">
+            Continue <i class="material-icons">arrow_forward</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

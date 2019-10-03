@@ -1,0 +1,15 @@
+<div [formGroup]="affiliationForm">
+    <div style="font-size:12px">
+        <div style="position:fixed;z-index:1000;left:55%;top:43%" *ngIf="show"><mat-spinner></mat-spinner></div>
+        <div style="padding:15px 20px;background-color:#fff">
+            <h5>Affiliations</h5>
+            <div style="width:100%;overflow:hidden;margin-bottom:10px"><input class="form-control" style="max-width:240px" placeholder="Filter by any word"  (keyup)="filterItem($event)" name="keyword"></div>
+            <div class="row">
+                <div class="col-md-4" *ngFor="let affiliation of affiliationsTmp;">
+                    <mat-checkbox [checked]="affiliation.isChecked" (change)="onChangeAffiliations(affiliation.name, $event)" ><span style="font-size:12px;white-space: normal;">{{affiliation.name}}</span></mat-checkbox>
+                </div>
+            </div>  
+        </div>       
+    </div>
+</div>
+

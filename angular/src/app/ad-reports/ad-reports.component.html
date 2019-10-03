@@ -1,0 +1,100 @@
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div>&nbsp;</div>
+    <h4>Agency Directory . Data Files</h4>
+         <div class="row">
+            <div class="col-md-4 text-center">
+                <mat-card style="height: 270px;margin-bottom:10px">              
+                  <div class="card-input" >
+                      <div><i style="font-size: 60px;color:#C2141C" class="material-icons">view_list</i></div>
+                      <h3>View Your Records</h3>                  
+                      <div>Order ID : #{{id}}</div>  
+                      <div>&nbsp;</div>            
+                      <div>    
+                          <button type="button" (click) = "reportView()" mat-raised-button
+                              color="primary"><i style="font-size:18px" class="material-icons">
+                                  visibility
+                              </i> View Records
+                          </button>                    
+                     </div>    
+                  </div> 
+                </mat-card>
+            </div>   
+            <div class="col-md-4 text-center">
+                <mat-card style="height: 270px;margin-bottom:10px">              
+                  <div class="card-input" >
+                      <div><i style="font-size: 60px;color:#C2141C" class="material-icons">description</i></div>
+                      <h3>Export Your Records to Excel</h3>                  
+                      <div>Order ID : #{{id}}</div>  
+                      <div>&nbsp;</div>            
+                      <div>    
+                          <button type="button" (click)="ExportTOExcel()" mat-raised-button
+                              color="primary"><i style="font-size:18px" class="material-icons">
+                                  description
+                              </i> Export File
+                          </button>                    
+                     </div>    
+                  </div> 
+                </mat-card>
+            </div> 
+            <div class="col-md-4 text-center">
+                <mat-card style="height: 270px;margin-bottom:10px">              
+                  <div class="card-input" >
+                      <div><i style="font-size: 60px;color:#C2141C" class="material-icons">location_on</i></div>
+                      <h3>Use Map to Locate Your Customers</h3>                  
+                      <div>Order ID : #{{id}}</div> 
+                      <div>&nbsp;</div>             
+                      <div>    
+                          <button (click)= "mapView()" type="button" mat-raised-button
+                              color="primary"><i style="font-size:18px" class="material-icons">
+                                  location_on
+                              </i> View Map
+                          </button>                    
+                     </div>    
+                  </div> 
+                </mat-card>
+            </div>           
+        </div>   
+        <div>&nbsp;</div>   
+        <mat-card>
+            <mat-list>
+                <mat-card-title>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locate your Customers & Resources</mat-card-title>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>location_on</mat-icon>
+                   <p mat-line> Map out all of your appointed and non-appointed agencies, with their agency name, address, city,state, and other data to uncover new opportunities and expand your footprint. </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>location_on</mat-icon>
+                     <p mat-line> Determine a branch’s area of influence. </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>location_on</mat-icon>
+                    <p mat-line>Assist brokers, underwriters and account executives in the field to plan a series of visits or calls. </p>
+                </mat-list-item>
+              </mat-list>
+        </mat-card>
+        <div>&nbsp;</div>
+        <mat-card>
+          <div>
+              <div><b>Review over 68 fields of types of fields, the length of each field. A technical dataset guideline for you to easily map the data into your CRM or database of your choice.</b></div>
+              <div>&nbsp;</div>
+              <mat-divider></mat-divider>
+              <div>&nbsp;</div>
+              <div style="overflow: hidden">
+                  <a style="border-right: 1px solid #ccc;padding-right:30px;float:left" target="_blank" href="assets/images/TechInfo.pdf">
+                    <img src="assets/images/pdf.png" /><br>
+                    Export to PDF
+                  </a>
+                  &nbsp;<a style="padding-left:30px;float:left" target="_blank" href="assets/images/TechnicalDatset.xlsx">
+                    <img src="assets/images/xltocsv.png" />
+                    <br>
+                    Export to Excel 
+                  </a>
+              </div>
+          </div>
+       </mat-card>
+    </div>
+  </div>
+  

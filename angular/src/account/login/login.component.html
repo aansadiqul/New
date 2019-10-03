@@ -1,0 +1,123 @@
+﻿<div class="card" [@routerTransition]>
+  <div class="body">
+    <form
+      novalidate
+      autocomplete="off"
+      #loginForm="ngForm"
+      (ngSubmit)="login()"
+    >
+	  <div class="loginhead">
+			Welcome to<br><b>Agency &amp; Business Directory</b>
+	  </div>
+
+      <!--<h4 class="text-center">
+	  {{ "LogIn" | localize }}
+	  </h4>-->
+	  <div class="loginbox">
+		  <div class="row clearfix">
+			<div class="col-xs-12">
+			  <div class="input-group">
+				<span class="input-group-addon">
+				   Username
+				  <!--<i class="material-icons">person</i>-->
+				</span>
+				<div class="input1">
+				  <!--matInput<mat-form-field>-->
+					<input
+                      [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress"
+					  name="userNameOrEmailAddress"
+					  placeholder="email@example.com"
+					  autocomplete="off"
+					  required
+					  maxlength="255"
+					/>
+				  <!--</mat-form-field>-->
+				</div><!--[placeholder]="'UserNameOrEmail' | localize"  [(ngModel)]="
+						loginService.authenticateModel.userNameOrEmailAddress
+					  "-->
+			  </div>
+			  <hr/>
+			  <div class="input-group">
+				<span class="input-group-addon">
+				   Password
+				  <!--<i class="material-icons">lock</i>-->
+				</span>
+				<div class="input1">
+				  <!--matInput<mat-form-field>-->
+					<input
+					  [(ngModel)]="loginService.authenticateModel.password"
+					  type="password"
+					  name="password"
+					  autocomplete="off"
+					  placeholder="********"
+					  required
+					  maxlength="32"
+					/>
+				  <!--</mat-form-field>-->
+				</div> <!--[placeholder]="'Password' | localize"    [(ngModel)]="loginService.authenticateModel.password"-->
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+      <div class="row submitsec">
+        <div class="col-xs-12 remembersec">
+          <mat-checkbox name="rememberMe" [(ngModel)]="loginService.rememberMe">
+            {{ "RememberMe" | localize }}
+          </mat-checkbox>
+        </div>
+        <div class="col-xs-12 remembersec">
+          <button
+            mat-flat-button
+            type="submit"
+            flex="15"
+            color="accent"
+			class="btn-block"
+            [disabled]="!loginForm.form.valid || submitting"
+          >
+            {{ "LogIn" | localize }}
+          </button>
+        </div>
+		<div class="col-xs-12">
+			Trouble Signing In? <a style="color:#c2151c;text-decoration:underline" href="javascript:;" id="m_login_forget_password" class="m-link">Reset Your Password</a>
+		</div>
+      </div>
+
+      <!--<div class="row m-t-15 m-b--20" *ngIf="isSelfRegistrationAllowed">
+        <div class="col-xs-12">
+          <a [routerLink]="['../register']">{{ "Register" | localize }}</a>
+        </div>
+      </div>-->
+    </form>
+
+  </div>
+</div>
+
+<style>
+.input-group {
+    margin-bottom: 0px !important;
+	padding: 0px 15px;
+}
+.card .body .col-xs-12 {
+   margin-bottom: 0px !important;
+}
+hr {
+     margin-top: 0px;
+     margin-bottom: 0px;
+
+}
+.submitsec{padding:0px 25px;}
+.remembersec{padding-bottom:10px}
+.input-group input{border:none;}
+.input-group input:-internal-autofill-selected{background-color:#fff !important;}
+.input1{padding:10px 15px;}
+/*Change text in autofill textbox*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+</style>
+

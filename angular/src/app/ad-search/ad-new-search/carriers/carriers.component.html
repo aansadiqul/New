@@ -1,0 +1,31 @@
+<div [formGroup]="carrierForm">
+    <div style="font-size:12px">
+        <div style="position:fixed;z-index:1000;left:55%;top:43%" *ngIf="show">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div style="padding:15px 20px;background-color:#fff">
+            <h5>Carriers</h5>
+            <div style="width:100%;overflow:hidden;margin-bottom:10px">
+
+                <mat-radio-group formControlName="CarrierManageCrieteria" aria-label="Select an option">
+                    <mat-radio-button value="INCLUDE" [checked]="true">Include</mat-radio-button>
+                    <mat-radio-button value="EXCLUDE">Exclude</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div style="width:100%;overflow:hidden;margin-bottom:10px">
+                <input class="form-control" style="max-width:240px" placeholder="Search..." (keyup)="filterItem($event)"
+                    name="keyword">
+            </div>
+
+            <div class="row">
+                <div class="col-md-4" *ngFor="let carrier of carrierTmp;">
+                    <mat-checkbox class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="carrier.isChecked"
+                        (change)="onChangeCarrier(carrier.name, $event)"><span
+                            style="font-size:12px;white-space: normal;">{{carrier.name}}</span></mat-checkbox>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <button class="btn btn-primary" name="btn1" (click)="fun($event,false)">kashfkg====</button>
+</div>

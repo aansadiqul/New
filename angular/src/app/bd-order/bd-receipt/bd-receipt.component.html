@@ -1,0 +1,68 @@
+<div style="position:fixed;z-index:9999;left:50%;top:30%" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="!loading">    
+        <h1 mat-dialog-title>BD Purchase Order Receipt 
+            <div class="pull-right">
+                <button type="button" (click)="captureScreen();" mat-raised-button color="primary"><i style="font-size:18px"
+                  class="material-icons">
+                  receipt
+                </i> PDF
+              </button>&nbsp;
+              <button type="button" mat-raised-button color="primary"><i style="font-size:18px"
+                  class="material-icons">
+                  print
+                </i> Print
+              </button>
+            </div>
+        </h1>    
+        <div id="contentToConvert" style="background: #fff;font-size:18px">
+          <div class="row" style="background:#2C2E3D;padding: 15px;margin-top:0;">
+             <div class="col-md-4"><img src="assets/images/logomain.png" width="100" /></div>
+             <div class="col-md-8" style="color: #fff;font-size:22px;padding-top: 8px">Business Directory Purchase Receipt</div>
+          </div>
+          <div style="padding:20px 40px 0 40px;">
+               <h2>Purchase Receipt</h2>             
+              <mat-divider></mat-divider>
+              <div style="margin-top:10px">
+                  <strong>{{bdReceipt.neilson.companyName}}</strong><br>
+                  {{bdReceipt.neilson.address}}<br>
+                  {{bdReceipt.neilson.state}} {{bdReceipt.neilson.zip}}<br>
+                  {{bdReceipt.neilson.telephone}}
+              </div>              
+              <h2>Customer</h2>          
+              <mat-divider></mat-divider>
+              <div>&nbsp;</div>
+              <div >
+                  <strong>
+                    <span>{{bdReceipt.customer.companyName}}</span>
+                  </strong><br>
+                  <span>{{bdReceipt.customer.fName}}</span>
+                  <span>{{bdReceipt.customer.lName}}</span><br>
+                  <span>{{bdReceipt.customer.address}}</span><br>
+                  <span>{{bdReceipt.customer.city}}</span>,
+                  <span>{{bdReceipt.customer.state}}</span>
+                  <span>{{bdReceipt.customer.zip}}</span><br>
+                  <span>{{bdReceipt.customer.telephone}}</span>
+              </div>             
+              <h2>Order</h2>           
+              <mat-divider></mat-divider>
+              <div>&nbsp;</div>
+              <div>                
+                    <div><span>Number: {{bdReceipt.order.id}}</span></div> 
+                    <div><span>Date: {{bdReceipt.order.creationTime}}</span></div> 
+                    <div><span>Amount: ${{bdReceipt.order.orderValue}}</span></div> 
+                    <div><span>Sales Person: {{bdReceipt.order.salesUser}}</span></div> 
+                    <div><span>Description: {{bdReceipt.order.description}}</span></div> 
+                    <div><span>Transaction: {{bdReceipt.order.ccTransactionId}}</span></div> 
+                    <div><span>Card Number: {{bdReceipt.order.ccNum}}</span></div> 
+                    <div><span>Order Notes: {{bdReceipt.order.orderNotes}}</span></div> 
+              </div>              
+            </div>
+            <br>
+        </div>
+      </div>
+</div>
+
+

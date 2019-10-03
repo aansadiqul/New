@@ -1,0 +1,181 @@
+<div [formGroup]="companyForm" #myForm="ngForm">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Company Type</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-radio-group formControlName="TypeCriteria" name="TypeCriteria" aria-label="Select an option">
+            <mat-radio-button value="CONTAINS" [checked]="true">Contains</mat-radio-button>
+            <mat-radio-button value="EXACT MATCH">Exact Match</mat-radio-button>
+            <mat-radio-button value="STARTS WITH">Starts With</mat-radio-button>
+          </mat-radio-group><br><br>
+          <mat-checkbox aria-label="SELECT ALL" (change)="$event ? SelectAll($event) : null">
+            SELECT ALL
+          </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <div style="width:100%;overflow:hidden;margin-bottom:10px;margin-top:10px">
+            <input class="form-control pull-right" style="max-width:240px" placeholder="Search..."
+              (keyup)="filterItem($event)" name="keyword">
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div>&nbsp;</div>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let companyType of companyTypes;">
+
+          <mat-checkbox [checked]="companyType.isChecked" (change)="onChange(companyType.name, $event)">
+            {{companyType.name}}</mat-checkbox>
+
+        </div>
+      </div>
+
+
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Company Size
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-md-4 text-right">
+          Premium volume(.1 = $100,000)<a href="javascript:void()" data-toggle="modal" data-target="#helpModal"><i
+              class="material-icons vertical-align-bottom">help</i></a>
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" name="PremValFrom" numbersOnly formControlName="PremValFrom"
+            (input)="onPremValChange($event.target.value)" [placeholder]="'From'" maxlength="32" [(ngModel)]="ss" />
+        </div>
+        <div class="col-md-3">
+
+          <input class="form-control" name="PremValTo" numbersOnly [(ngModel)]="sst" formControlName="PremValTo"
+            [placeholder]="'to'" maxlength="32" />
+
+        </div>
+        <div class="col-md-2">
+          <mat-radio-group formControlName="PEmpCriteria" aria-label="Select an option">
+            <mat-radio-button value="and">AND</mat-radio-button>
+            <mat-radio-button value="or" [checked]="true">OR</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div class="row">
+        <div class="col-md-4 text-right">
+          Revenue (.1 = $100,000)<a href="javascript:void()" data-toggle="modal" data-target="#helpModal"><i
+              class="material-icons">help</i></a>
+        </div>
+        <div class="col-md-3">
+          <!-- [ngModel]="RVFromval"  -->
+
+          <input class="form-control" id="RVFrom" numbersOnly name="RVFrom" formControlName="RVFromval"
+            [placeholder]="'From'" [ngModel]="RVFromval" maxlength="32" />
+
+        </div>
+        <div class="col-md-3">
+
+          <input class="form-control" id="RVTo" numbersOnly formControlName="RVTo" name="RVTo" [placeholder]="'to'"
+            maxlength="32" />
+
+        </div>
+        <div class="col-md-2">
+          <mat-radio-group formControlName="RevenueCriteria" aria-label="Select an option">
+            <mat-radio-button value="and">AND</mat-radio-button>
+            <mat-radio-button value="or" [checked]="true">OR</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div class="row">
+        <div class="col-md-4 text-right">
+          Number of Employees
+        </div>
+        <div class="col-md-3">
+          <!--[ngModel]="Empval"         -->
+
+          <input numbersOnly class="form-control" name="Name" [placeholder]="'From'" formControlName="Empval"
+            [ngModel]="Empval" maxlength="32" />
+
+        </div>
+        <div class="col-md-3">
+
+          <input numbersOnly class="form-control" name="Name" formControlName="EmpvalTo" [placeholder]="'to'"
+            maxlength="32" />
+
+        </div>
+        <div class="col-md-2">
+
+        </div>
+      </div>
+      <div>&nbsp;</div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Agency Management System
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-radio-group formControlName="AgencyMgntCriteria" aria-label="Select an option">
+            <mat-radio-button value="INCLUDE" [checked]="true">Include</mat-radio-button>
+            <mat-radio-button value="EXCLUDE">Exclude</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-md-6">
+          <div style="width:100%;overflow:hidden;margin-bottom:10px;margin-top:10px;">
+            <input class="form-control pull-right" style="max-width:240px" placeholder="Search..."
+              (keyup)="filterAMSItem($event)" name="keyword">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let amg of amgList;">
+          <mat-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]="amg.isChecked"
+            (change)="onChangeAgencyManage(amg.name, $event)">{{amg.name}}
+          </mat-checkbox>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Search by Company Name
+      </mat-expansion-panel-header>
+      <div calss="row">
+        <div class="col-md-6">
+
+          <input class="form-control" formControlName="CompanyName" name="Company" [placeholder]="'Company Name'"
+            maxlength="100" />
+
+        </div>
+        <div class="col-md-6">
+          <mat-radio-group formControlName="CompanyNameType" aria-label="Select an option">
+            <mat-radio-button value="BEGINS" [checked]="true">Begins</mat-radio-button>
+            <mat-radio-button value="CONTAINS">Contains</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Minority Owned
+      </mat-expansion-panel-header>
+      <div calss="row">
+        <div class="col-md-6">
+
+
+
+        </div>
+        <div class="col-md-6">
+          <mat-radio-group formControlName="MinorityOwned" aria-label="Select an option">
+            <mat-radio-button value="0" [checked]="true">True</mat-radio-button>
+            <mat-radio-button value="1">False</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <button class="btn btn-primary" name="btn1" (click)="fun($event,false)">kashfkg====</button>
+  </mat-accordion>
+  <button type="button" (click)="reset(myForm)">Click</button>
+</div>

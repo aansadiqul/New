@@ -1,0 +1,948 @@
+<div style="position:fixed;z-index:9999;left:50%;top:30%" *ngIf="saving">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="row clearfix" [@routerTransition]>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <form autocomplete="off" novalidate [formGroup]="bdForm">
+      <h1 mat-dialog-title>New Search</h1>
+      <input type="hidden" formControlName="dummy" />
+      <mat-dialog-content>
+        <mat-tab-group
+          [(selectedIndex)]="selectedIndex"
+          (selectedIndexChange)="tabChange($event)"
+        >
+          <mat-tab [label]="'Company'">
+            <br />
+            <app-bd-company
+              (formReady)="formInitialized('company', $event)"
+            ></app-bd-company>
+          </mat-tab>
+          <mat-tab [label]="'Geographic'">
+            <br />
+            <app-geographic
+              [isAdSearch]="false"
+              (formReady)="formInitialized('geographic', $event)"
+            >
+            </app-geographic>
+          </mat-tab>
+          <mat-tab [label]="'Industry'">
+            <br />
+            <div *ngIf="IndustryTabShow">
+              <app-industry
+                (formReady)="formInitialized('industry', $event)"
+              ></app-industry>
+            </div>
+          </mat-tab>
+          <mat-tab [label]="'Get Count'">
+            <br />
+
+            <div style="background-color:#fff;padding:20px;">
+              <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <mat-card>
+                <mat-card-title>
+                  Search Name
+                </mat-card-title>
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <input
+                        formControlName="QueryName"
+                        class="form-control"
+                        (keyup)="changeQueryName($event)"
+                        [value]="searchName"
+                        id="savesearch"
+                        placeholder="Save Search"
+                      />
+                      <i style="font-size:10px"
+                        >You can rename the Search before purchasing.</i
+                      >
+                    </div>
+                    <div class="col-md-3">
+                      <button
+                        (click)="saveSearch()"
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                      >
+                        <i style="font-size:18px" class="material-icons">
+                          save
+                        </i>
+                        Save Search
+                      </button>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              <mat-divider></mat-divider>
+              <mat-card>
+                <mat-card-title>
+                  Records Available
+                </mat-card-title>
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-red">
+                          <tr>
+                            <th>Record Type</th>
+                            <th>Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Records</td>
+                            <td>{{ bdCounts.businessListCount }}</td>
+                          </tr>
+                          <tr>
+                            <td>X-Dates</td>
+                            <td>{{ bdCounts.bdxDateListCount }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              <mat-divider></mat-divider>
+              <mat-card>
+                <mat-card-title>
+                  X-Date Breakdown by Month
+                </mat-card-title>
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div style="overflow-x:scroll">
+                        <table class="table">
+                          <thead class="thead-red">
+                            <tr>
+                              <th>Month</th>
+                              <th>Jan</th>
+                              <th>Feb</th>
+                              <th>Mar</th>
+                              <th>Apr</th>
+                              <th>May</th>
+                              <th>Jun</th>
+                              <th>Jul</th>
+                              <th>Aug</th>
+                              <th>Sep</th>
+                              <th>Oct</th>
+                              <th>Nov</th>
+                              <th>Dec</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><b>Count</b></td>
+                              <td
+                                *ngFor="
+                                  let breakdownByMonth of breakdownByMonths
+                                "
+                              >
+                                {{ breakdownByMonth.xdatecount }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              <mat-divider></mat-divider>
+              <mat-card>
+                <mat-card-title>
+                  Purchase
+                </mat-card-title>
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <button
+                        style="margin-bottom:10px;"
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                        [disabled]="bdCounts.businessListCount == 0"
+                        (click)="onPurchaseRecords()"
+                      >
+                        <i class="material-icons">
+                          shopping_cart
+                        </i>
+                        Purchase Records
+                      </button>
+                    </div>
+                    <div class="col-md-3">
+                      <button
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                        (click)="onPurchaseXDates()"
+                        [disabled]="bdCounts.bdxDateListCount == 0"
+                        style="margin-bottom:10px;background-color:#2C2E3D;"
+                      >
+                        <i class="material-icons">
+                          shopping_cart
+                        </i>
+                        Purchase X-Dates
+                      </button>
+                    </div>
+                    <div class="col-md-3">
+                      <button
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                        (click)="onPurchaseAll()"
+                        [disabled]="
+                          bdCounts.businessListCount == 0 ||
+                          bdCounts.bdxDateListCount == 0
+                        "
+                        style="margin-bottom:10px;"
+                      >
+                        <i class="material-icons">
+                          shopping_cart
+                        </i>
+                        Purchase All
+                      </button>
+                    </div>
+                    <div class="col-md-3">
+                      <button
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                        (click)="onMap('M')"
+                        style="margin-bottom:10px;background-color:#2C2E3D;"
+                      >
+                        <i class="material-icons">
+                          location_on
+                        </i>
+                        Show on Map
+                      </button>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              <mat-divider></mat-divider>
+              <mat-card>
+                <mat-card-title>
+                  Analyze via Breakdown
+                </mat-card-title>
+                <div class="row">
+                  <div class="col-md-3">
+                    <select
+                      (change)="onChangeBrk1($event)"
+                      id="cmbAnalyzeList1"
+                      name="firstValue"
+                      class="form-group form-control"
+                    >
+                      <option value="">Select</option>
+                      <option value="State">State</option>
+                      <option value="StateCounty">County</option>
+                      <option value="Zip">Zip Codes</option>
+                      <option value="AreaCode">Area Code</option>
+                      <option value="SMSACode">Metro Area</option>
+                      <option value="employees">Employee Size</option>
+                      <option value="sales">Revenue</option>
+                      <option value="substring(sic8,1,2)">2 Digit SIC</option>
+                      <option value="substring(sic8,1,4)">4 Digit SIC</option>
+                      <option value="substring(sic8,1,6)">6 Digit SIC</option>
+                      <option value="sic8">8 Digit SIC</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select
+                      (change)="onChangeBrk2($event)"
+                      id="cmbAnalyzeList2"
+                      name="secondValue"
+                      class="form-group form-control"
+                    >
+                      <option value="">Select</option>
+                      <option value="State">State</option>
+                      <option value="StateCounty">County</option>
+                      <option value="Zip">Zip Codes</option>
+                      <option value="AreaCode">Area Code</option>
+                      <option value="SMSACode">Metro Area</option>
+                      <option value="employees">Employee Size</option>
+                      <option value="sales">Revenue</option>
+                      <option value="substring(sic8,1,2)">2 Digit SIC</option>
+                      <option value="substring(sic8,1,4)">4 Digit SIC</option>
+                      <option value="substring(sic8,1,6)">6 Digit SIC</option>
+                      <option value="sic8">8 Digit SIC</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select
+                      (change)="onChangeBrk3($event)"
+                      id="cmbAnalyzeList2"
+                      name="secondValue"
+                      class="form-group form-control"
+                    >
+                      <option value="">Select</option>
+                      <option value="State">State</option>
+                      <option value="StateCounty">County</option>
+                      <option value="Zip">Zip Codes</option>
+                      <option value="AreaCode">Area Code</option>
+                      <option value="SMSACode">Metro Area</option>
+                      <option value="employees">Employee Size</option>
+                      <option value="sales">Revenue</option>
+                      <option value="substring(sic8,1,2)">2 Digit SIC</option>
+                      <option value="substring(sic8,1,4)">4 Digit SIC</option>
+                      <option value="substring(sic8,1,6)">6 Digit SIC</option>
+                      <option value="sic8">8 Digit SIC</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <button
+                      data-toggle="modal"
+                      data-target="#analyzeModal"
+                      (click)="getAnalyzedData()"
+                      [disabled]="!isAnalyze"
+                      type="button"
+                      mat-raised-button
+                      color="primary"
+                      style="background-color:#2C2E3D;"
+                    >
+                      <i class="material-icons">
+                        swap_horiz
+                      </i>
+                      Analyze
+                    </button>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-divider></mat-divider>
+              <mat-card>
+                <mat-card-title>
+                  Search Summary
+                </mat-card-title>
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-red">
+                          <tr>
+                            <th>Page</th>
+                            <th>Criteria</th>
+                            <th>Value</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let summary of searchSummary">
+                            <td>{{ summary.page }}</td>
+                            <td>{{ summary.criteria }}</td>
+                            <td>{{ summary.value }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </mat-tab>
+          <mat-tab [label]="'Purchase'">
+            <br />
+            <h4>Order Details (Query6/13/2019/12:27:30/PM)</h4>
+            <mat-card *ngIf="IsRecord">
+              <mat-card-title>
+                Records
+              </mat-card-title>
+              <mat-divider></mat-divider>
+              <div class="row" style="margin-top:25px;margin-bottom:10px">
+                <div class="col-md-12">Records Available: {{ bdCounts.businessListCount }} </div>
+              </div>
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-md-12">Record Credits: 0</div>
+              </div>
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-md-12">
+                  Records to Purchase(Credits) : 0
+                </div>
+              </div>
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-md-4">
+                  <label>
+                      Records to Purchase
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    (input)="onRecordsPurchase($event.target.value)"
+                    min="0"
+                    max="{{ bdCounts.businessListCount }}"
+                  />
+                </div>
+                <!-- <div class="col-md-4 text-left" *ngIf="!IsXdate">
+                  &nbsp;&nbsp;<mat-checkbox
+                    aria-label="Add X-Dates"
+                    (change)="$event ? withXdates($event) : null"
+                  >
+                    Add X-Dates
+                  </mat-checkbox>
+                </div> -->
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-left">
+                  <label>Price per Record</label>
+                  <div class="input-group">
+                    <span
+                      class="input-group-addon"
+                      style="border:1px solid #ccc;background-color: #eee;padding-left: 12px;"
+                      >$</span
+                    >
+                    <input
+                      style="border:1px solid #ccc;max-width:70px;padding-left:5px"
+                      type="number"
+                      [value]="recordPrice"
+                      min="0"
+                      (input)="onRecordPrice($event.target.value)"
+                      class="form-control"
+                      [disabled]="!isAdmin"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">Records Total Price : {{ recordOrderAmt | currency }}</div>
+              </div>
+            </mat-card>
+            <mat-divider></mat-divider>
+            <mat-card *ngIf="IsXdate">
+              <mat-card-title>
+                X-Dates ( X-Dates Records Available
+                {{ bdCounts.bdxDateListCount }} )
+              </mat-card-title>
+              <div>
+                <mat-checkbox
+                  aria-label="Select All"
+                  [checked]="isChecked()"
+                  [indeterminate]="isIndeterminate()"
+                  (change)="$event ? toggleAll($event) : null"
+                >
+                  <span *ngIf="isChecked(selected3)"><b>DESELECT ALL</b></span>
+                  <span *ngIf="!isChecked(selected3)"><b>SELECT ALL</b></span>
+                </mat-checkbox>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="row" style="margin-top:10px">
+                <div
+                  *ngFor="let breakdownByMonth of breakdownByMonths"
+                  class="col-md-3"
+                >
+                  <mat-checkbox
+                    (click)="$event.stopPropagation()"
+                    (change)="$event ? toggle(breakdownByMonth, $event) : null"
+                    [checked]="exists(breakdownByMonth)"
+                  >
+                    {{ breakdownByMonth.month }} (
+                    {{ breakdownByMonth.xdatecount }} )
+                  </mat-checkbox>
+                </div>
+              </div>
+              <div class="row" style="margin-top:15px;margin-bottom:10px;">
+                <div class="col-md-12">
+                  <label>X-Dates To purchase</label>
+                  <input
+                    style="max-width:104px"
+                    class="form-control"
+                    type="number"
+                    [value]="xDatesPurchasedCnt"
+                    (input)="onxDatesPurchasedCnt($event.target.value)"
+                    min="0"
+                    max="{{ bdCounts.bdxDateListCount }}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label>X-Dates Price per Record</label>
+                  <div class="input-group">
+                    <span
+                      class="input-group-addon"
+                      style="border:1px solid #ccc;background-color: #eee;padding-left: 12px;"
+                      >$</span
+                    >
+                    <input
+                      style="border:1px solid #ccc;max-width:70px;padding-left:5px"
+                      type="number"
+                      [value]="xDatePrice"
+                      class="form-control"
+                      min="0"
+                      (input)="onPricePerXdate($event.target.value)"
+                      [disabled]="!isAdmin"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label>X-Dates Total Price: {{ xDatesOrderAmt | currency }} </label>
+                </div>
+              </div>
+            </mat-card>
+            <mat-divider *ngIf="IsXdate"></mat-divider>
+            <mat-card>
+              <mat-card-title>
+                Order
+              </mat-card-title>
+              <mat-divider></mat-divider>
+              <div class="row" style="margin-top:20px;margin-bottom:10px">
+                <div class="col-md-12">Order Total :  {{ orderValue | currency }}</div>
+              </div>
+              <div *ngIf="isAdmin" class="row">
+                <div class="col-md-6">
+                  <label>Override Total</label>
+                  <div class="input-group">
+                    <span
+                      class="input-group-addon"
+                      style="border:1px solid #ccc;background-color: #eee;padding-left: 12px;"
+                      >$</span
+                    >
+                    <input
+                      style="border:1px solid #ccc;padding-left:5px"
+                      type="number"
+                      [value]="overrideTotal"
+                      (input)="onOverrideTotal($event.target.value)"
+                      class="form-control"
+                    />
+                    <span class="input-group-addon">&nbsp;(U.S. Dollars) </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                   <label>Notes</label>
+                  <textarea
+                    class="form-control"
+                    [value]="orderNotes"
+                    (input)="onOrderNotes($event.target.value)"
+                  ></textarea>
+                </div>
+              </div>
+              <div>&nbsp;</div>
+              <div>
+                <button
+                  style="background-color:#4CAF50"
+                  mat-raised-button
+                  (click)="onContinue()"
+                  color="accent"
+                  type="button"
+                >
+                  Continue<i class="material-icons">arrow_forward</i>
+                </button>
+              </div>
+            </mat-card>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-dialog-content>
+      <div
+        *ngIf="showCountButton"
+        style="background-color:#fff;padding:5px 20px;border-top:2px solid #f4f5f8;margin-bottom:10px"
+      >
+        <div>&nbsp;</div>
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-stroked-button>Clear Search</button>
+          </div>
+          <div class="col-md-6 text-right">
+            <button
+              style="background-color:#4CAF50"
+              mat-raised-button
+              (click)="save()"
+              color="accent"
+            >
+              GET COUNT
+            </button>
+          </div>
+        </div>
+        <div>&nbsp;</div>
+      </div>
+    </form>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="analyzeModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="analyzeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+        <h4 class="modal-title">Business Directory - Analyze via Breakdown</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-3">
+            <select
+              [value]="this.selectedBreakdown1"
+              (change)="onChangeBrk1($event)"
+              id="cmbAnalyzeList1"
+              name="firstValue"
+              class="form-group form-control"
+            >
+              <option value="">Select</option>
+              <option value="State">State</option>
+              <option value="StateCounty">County</option>
+              <option value="Zip">Zip Codes</option>
+              <option value="AreaCode">Area Code</option>
+              <option value="SMSACode">Metro Area</option>
+              <option value="employees">Employee Size</option>
+              <option value="sales">Revenue</option>
+              <option value="substring(sic8,1,2)">2 Digit SIC</option>
+              <option value="substring(sic8,1,4)">4 Digit SIC</option>
+              <option value="substring(sic8,1,6)">6 Digit SIC</option>
+              <option value="sic8">8 Digit SIC</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select
+              [value]="this.selectedBreakdown2"
+              (change)="onChangeBrk2($event)"
+              id="cmbAnalyzeList2"
+              name="secondValue"
+              class="form-group form-control"
+            >
+              <option value="">Select</option>
+              <option value="State">State</option>
+              <option value="StateCounty">County</option>
+              <option value="Zip">Zip Codes</option>
+              <option value="AreaCode">Area Code</option>
+              <option value="SMSACode">Metro Area</option>
+              <option value="employees">Employee Size</option>
+              <option value="sales">Revenue</option>
+              <option value="substring(sic8,1,2)">2 Digit SIC</option>
+              <option value="substring(sic8,1,4)">4 Digit SIC</option>
+              <option value="substring(sic8,1,6)">6 Digit SIC</option>
+              <option value="sic8">8 Digit SIC</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select
+              [value]="this.selectedBreakdown3"
+              (change)="onChangeBrk3($event)"
+              id="cmbAnalyzeList2"
+              name="secondValue"
+              class="form-group form-control"
+            >
+              <option value="">Select</option>
+              <option value="State">State</option>
+              <option value="StateCounty">County</option>
+              <option value="Zip">Zip Codes</option>
+              <option value="AreaCode">Area Code</option>
+              <option value="SMSACode">Metro Area</option>
+              <option value="employees">Employee Size</option>
+              <option value="sales">Revenue</option>
+              <option value="substring(sic8,1,2)">2 Digit SIC</option>
+              <option value="substring(sic8,1,4)">4 Digit SIC</option>
+              <option value="substring(sic8,1,6)">6 Digit SIC</option>
+              <option value="sic8">8 Digit SIC</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button
+              (click)="getAnalyzedData()"
+              [disabled]="!isAnalyze"
+              type="button"
+              mat-raised-button
+              color="primary"
+              style="background-color:#2C2E3D;"
+            >
+              <i class="material-icons">
+                swap_horiz
+              </i>
+              Analyze
+            </button>
+          </div>
+        </div>
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Filter"
+          />
+        </mat-form-field>
+        <div>
+          <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+            <ng-container matColumnDef="firstValue">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                style="text-transform: uppercase"
+              >
+                {{ selectedBreakdownTxt1 }}
+              </th>
+              <td mat-cell *matCellDef="let row">{{ row.firstValue }}</td>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="secondValue">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                style="text-transform: uppercase"
+              >
+                {{ selectedBreakdownTxt2 }}
+              </th>
+              <td mat-cell *matCellDef="let row">{{ row.secondValue }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="thirdValue">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                style="text-transform: uppercase"
+              >
+                {{ selectedBreakdownTxt3 }}
+              </th>
+              <td mat-cell *matCellDef="let row">{{ row.thirdValue }}</td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="records">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Records</th>
+              <td mat-cell *matCellDef="let row">{{ row.records }}</td>
+            </ng-container>
+            <!-- Color Column -->
+            <ng-container matColumnDef="description">
+              <!--*ngIf="hasSicCode"-->
+              <th
+                [style.display]="hasSicCode ? '' : 'none'"
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+              >
+                Description
+              </th>
+              <td
+                [style.display]="hasSicCode ? '' : 'none'"
+                mat-cell
+                *matCellDef="let row"
+              >
+                {{ row.description }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="helpModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="helpModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="helpModalLabel">
+          Annual Sales Dollars Guide
+        </h5>
+        <!--<button style="float:right" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>-->
+      </div>
+      <div class="modal-body">
+        <table
+          border="0"
+          align="center"
+          cellpadding="3"
+          cellspacing="1"
+          bgcolor="#0759A3"
+        >
+          <tbody>
+            <tr>
+              <td bgcolor="#FFFFFF">
+                How do I enter?
+                <table
+                  width="100%"
+                  cellpadding="3"
+                  cellspacing="1"
+                  bgcolor="#63B1F8"
+                  style="font-weight: bold"
+                >
+                  <tbody>
+                    <tr>
+                      <td
+                        width="41%"
+                        align="center"
+                        style="color: white; background-color: #63B1F8"
+                      >
+                        If you want
+                      </td>
+                      <td
+                        width="15%"
+                        align="center"
+                        style="color: white; background-color: #63B1F8"
+                      >
+                        &nbsp;
+                      </td>
+                      <td
+                        width="44%"
+                        align="center"
+                        style="color: white; background-color: #63B1F8"
+                      >
+                        Enter
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td align="left" bgcolor="#FFFFFF">
+                        100,000
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left"><strong>.</strong>1</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" bgcolor="#FFFFFF">
+                        1,000,000
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left">1</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" bgcolor="#FFFFFF">
+                        1,500,000
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left">1<strong>.</strong>5</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" bgcolor="#FFFFFF">
+                        10,000,000
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left">10</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" bgcolor="#FFFFFF">
+                        100,000,000
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left">100</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" bgcolor="#FFFFFF">
+                        1,000,000,000
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left">1000</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#FFFFFF">
+                Examples of custom ranges :
+                <table
+                  width="100%"
+                  border="0"
+                  cellpadding="3"
+                  cellspacing="1"
+                  bgcolor="#63B1F8"
+                  style="font-weight: bold"
+                >
+                  <tbody>
+                    <tr>
+                      <td width="155" align="right" bgcolor="#FFFFFF">
+                        <div align="left">From .1 to .9</div>
+                      </td>
+                      <td width="53" align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td width="170" align="left" bgcolor="#FFFFFF">
+                        100,000 to 900,000
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left">From 1.0 to 2.5</div>
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF" size="12px">
+                        =
+                      </td>
+                      <td align="left" bgcolor="#FFFFFF">
+                        1,000,000 to 2,500,000
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right" bgcolor="#FFFFFF">
+                        <div align="left">From .1 to 20</div>
+                      </td>
+                      <td align="center" bgcolor="#FFFFFF">
+                        =
+                      </td>
+                      <td align="left" bgcolor="#FFFFFF">
+                        100,000 to 20,000,000
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#FFFFFF">
+                To find 5 million or more enter from 5 to all or from 5 to
+                blank.
+                <br />
+                To find 100 million enter from 100 to 100.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

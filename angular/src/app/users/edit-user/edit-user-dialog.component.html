@@ -1,0 +1,211 @@
+﻿<form autocomplete="off" #editUserModal="ngForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{ "EditUser" | localize }}</h1>
+  <mat-dialog-content style="width:800px;height:360px;">
+    <mat-tab-group>
+        <mat-tab [label]="'Personal Information'">
+            <br />
+            <div class="row-fluid">
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <input
+                          matInput
+                          name="Name"
+                          [placeholder]="'First Name'"
+                          [(ngModel)]="user.name"
+                          required
+                          maxlength="32"
+                        />
+                      </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field>
+                      <input
+                        matInput
+                        name="Surname"
+                        [placeholder]="'Last Name'"
+                        [(ngModel)]="user.surname"
+                        required
+                        maxlength="32"
+                      />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <input
+                          matInput
+                          name="CompanyName"
+                          [placeholder]="'Company Name'"
+                          [(ngModel)]="customer.companyName"
+                          required
+                          maxlength="250"
+                        />
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                      <mat-form-field>
+                          <input
+                            matInput
+                            name="Address"
+                            [(ngModel)]="customer.address"
+                            [placeholder]="'Address'"
+                            required
+                            maxlength="250"
+                          />
+                        </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <input
+                          matInput
+                          name="City"
+                          [(ngModel)]="customer.city"
+                          [placeholder]="'City'"
+                          required
+                          maxlength="128"
+                        />
+                      </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                      <mat-form-field>
+                          <mat-select  [(ngModel)]="customer.country"   [placeholder]="'Select Country'" (selectionChange)="countryLevelChangeAction($event.value)"   name="Country" required>
+                              <mat-option  *ngFor="let Country of countryList" [value]="Country.countryName">{{Country.countryName}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-select [(ngModel)]="customer.state"  [placeholder]="'Select State'" name="State" required>
+                              <mat-option *ngFor="let state of states" [value]="state.value" >{{state.text}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <input
+                          matInput
+                          name="Zip"
+                          [(ngModel)]="customer.zip"
+                          [placeholder]="'Zip'"
+                          required
+                          maxlength="8"
+                        />
+                      </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <input
+                          matInput
+                          name="Telephone"
+                          [(ngModel)]="customer.telephone"
+                          [placeholder]="'Telephone'"
+                          required
+                          maxlength="12"
+                        />
+                      </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <input
+                          matInput
+                          name="Fax"
+                          [(ngModel)]="customer.fax"
+                          [placeholder]="'Fax'"
+
+                          maxlength="8"
+                        />
+                      </mat-form-field>
+                </div>
+            </div>
+      </mat-tab>
+      <mat-tab [label]="'UserDetails' | localize">
+        <br />
+        <div class="row-fluid">
+          <div class="col-md-6">
+            <mat-form-field>
+              <input
+                matInput
+                name="UserName"
+                [placeholder]="'UserName' | localize"
+                [(ngModel)]="user.userName"
+                required
+                minlength="2"
+                maxlength="32"
+              />
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-select  [(ngModel)]="customer.suserid"   [placeholder]="'Select Salesperson'"  name="suserid">
+                    <mat-option value="Online">Online</mat-option>
+                    <mat-option value="Paul Neilson">Paul Neilson</mat-option>
+                    <mat-option value="Larry Neilson">Larry Neilson</mat-option>
+                    <mat-option value="Jeff Neilson">Jeff Neilson</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <input
+                matInput
+                name="EmailAddress"
+                [placeholder]="'EmailAddress' | localize"
+                [(ngModel)]="user.emailAddress"
+                type="email"
+                required
+                maxlength="256"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+              />
+            </mat-form-field>
+            <br>
+            <div class="checkbox-wrapper">
+                <mat-checkbox name="IsActive" [(ngModel)]="user.isActive">
+                  {{ "IsActive" | localize }}
+                </mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab *ngIf="isAdmin" [label]="'UserRoles' | localize">
+        <br />
+        <div class="row-fluid">
+          <ng-template ngFor let-role [ngForOf]="roles">
+            <div class="col-sm-6">
+              <div class="checkbox-wrapper">
+                <mat-checkbox
+                  [checked]="isRoleChecked(role.normalizedName)"
+                  (change)="onRoleChange(role, $event)"
+                >
+                  {{ role.name }}
+                </mat-checkbox>
+                <span class="salesPerson" *ngIf="role.name == 'Admin'"> (
+                    <mat-checkbox name="SalesPerson" [disabled]="isSalesperson"  [(ngModel)]="customer.isSalesPerson">
+                      Is Salesperson?
+                    </mat-checkbox>)
+                  </span>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'Logo'">
+          <br />
+          <div style="text-align:center">
+              <img [src]="url" height="200"> <br/><br />
+              <label class="btn btn-success"><input accept="image/*" type='file' style="display:none" (change)="onSelectFile($event)">Upload Logo</label>
+          </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+      {{ "Cancel" | localize }}
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      flex="15"
+      color="primary"
+      [disabled]="!editUserModal.form.valid || saving"
+    >
+      {{ "Save" | localize }}
+    </button>
+  </div>
+</form>

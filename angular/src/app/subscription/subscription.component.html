@@ -1,0 +1,79 @@
+<div style="position:fixed;z-index:1000;left:55%;top:43%" *ngIf="show"><mat-spinner></mat-spinner></div>
+<div *ngIf="!show">
+  <div *ngIf="!isSubscribed" class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div>&nbsp;</div>
+      <h4>Agency Directory : Order Product</h4>
+      <form
+        autocomplete="off"
+        novalidate
+        [formGroup]="orderForm"
+        (ngSubmit)="save()"
+      >
+        <mat-card>
+          <mat-card-title>Select your Product : </mat-card-title>
+        </mat-card>
+        <div>&nbsp;</div>
+        <div class="row">
+          <div
+            class="col-md-3 text-center"
+            *ngFor="let subsription of subsriptionPlans"
+          >
+            <mat-card style="height: 100;">
+              <label>
+                <input
+                  type="radio"
+                  name="amount"
+                  formControlName="amount"
+                  class="card-input-element"
+                  [value]="subsription.amount"
+                  (change)="getChekedOption(subsription.id)"
+                />
+                <div class="card-input">
+                  <div>
+                    <i
+                      style="font-size: 50px;color:#C2141C"
+                      class="material-icons"
+                      >shopping_cart</i
+                    >
+                  </div>
+                  <h3>${{ subsription.amount }}</h3>
+                  <h4>{{ subsription.typeName }}</h4>
+                  <h5>{{ subsription.options }}</h5>
+                </div>
+              </label>
+            </mat-card>
+          </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="row">
+          <div class="col-md-12">
+            <label>&nbsp;</label>
+            <button  type="submit" mat-raised-button color="primary">
+              Continue <i class="material-icons">arrow_forward</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="isSubscribed" class="row clearfix">
+    <div>&nbsp;</div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-3">
+            <mat-card>
+                <mat-card-title>Subscription Details</mat-card-title>
+                <!-- <img mat-card-image src="assets/images/retail-icon.png" alt="Photo of a Shiba Inu">                 -->
+                Subscription Plan Name: {{subsriptionPlan.typeName}}<br />
+                Amount: {{subsriptionPlan.amount}}<br />
+                Options: {{subsriptionPlan.options}}<br />
+                Access Level: {{subsriptionPlan.accessLevel}}<br />
+                Expire Date: {{expireDate | date: 'dd/MM/yyyy'}}
+              </mat-card>
+        </div>
+    </div>
+      
+    <div>&nbsp;</div>
+  </div>
+</div>

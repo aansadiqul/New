@@ -1,0 +1,66 @@
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wwwroot\swagger\ui\index.html
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\Dockerfile
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.dll.config
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.deps.json
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.runtimeconfig.json
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.runtimeconfig.dev.json
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.pdb
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Application.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Core.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.EntityFrameworkCore.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Core.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Core.pdb
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Application.pdb
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Core.pdb
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.EntityFrameworkCore.pdb
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.EntityFrameworkCore.dll.config
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.csprojAssemblyReference.cache
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.csproj.CoreCompileInputs.cache
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.RazorAssemblyInfo.cache
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.RazorAssemblyInfo.cs
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.AssemblyInfoInputs.cache
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.AssemblyInfo.cs
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.RazorTargetAssemblyInfo.cache
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.csproj.CopyComplete
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.pdb
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\32 bit\libwkhtmltox.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\32 bit\libwkhtmltox.dylib
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\32 bit\libwkhtmltox.so
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\64 bit\libwkhtmltox.dll
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\64 bit\libwkhtmltox.dylib
+D:\Project\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\64 bit\libwkhtmltox.so
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\32 bit\libwkhtmltox.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\32 bit\libwkhtmltox.dylib
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\32 bit\libwkhtmltox.so
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\64 bit\libwkhtmltox.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\64 bit\libwkhtmltox.dylib
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wkhtmltox\v0.12.4\64 bit\libwkhtmltox.so
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\wwwroot\swagger\ui\index.html
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\Dockerfile
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.dll.config
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.deps.json
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.runtimeconfig.json
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.runtimeconfig.dev.json
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Host.pdb
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Application.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Core.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.EntityFrameworkCore.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Core.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Web.Core.pdb
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Application.pdb
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.Core.pdb
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.EntityFrameworkCore.pdb
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\bin\Debug\netcoreapp2.2\ABD.EntityFrameworkCore.dll.config
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.csprojAssemblyReference.cache
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.csproj.CoreCompileInputs.cache
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.RazorAssemblyInfo.cache
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.RazorAssemblyInfo.cs
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.AssemblyInfoInputs.cache
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.AssemblyInfo.cs
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.RazorTargetAssemblyInfo.cache
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.csproj.CopyComplete
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.dll
+F:\Projects\ABD\ABD\aspnet-core\src\ABD.Web.Host\obj\Debug\netcoreapp2.2\ABD.Web.Host.pdb

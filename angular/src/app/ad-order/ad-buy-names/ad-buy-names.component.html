@@ -1,0 +1,85 @@
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h4>Agency Directory • Provide Payment</h4>
+    <mat-card>
+        <mat-card-title>
+            Order Information:
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <div class="row" style="margin-top:25px;margin-bottom:10px">
+            <div class="col-md-12 ">Agency Records count: {{agencyCount}}</div>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-md-12 ">Agency Records Price: ${{totalAgencyPrice}}	</div>
+
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-md-12">Additional Contacts Count: {{contactCount}}</div>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-md-12">Additional Contacts Price: ${{totalAdditionalPrice}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <label> Total Order USD </label>
+                <div class="input-group">
+                    <span class="input-group-addon" style="border:1px solid #ccc;background-color: #eee;padding-left: 12px;">$</span>
+                    <input style="border:1px solid #ccc;max-width:110px;padding-left:5px" type="text" readonly [value]="totalOrder" class="form-control">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-4 ">Notes</div>
+            <div class="col-md-4 text-left">
+                <textarea class="form-control"></textarea>
+            </div>
+        </div> -->
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-md-12">
+                <mat-checkbox aria-label="Buy Additional Contacts" [checked]= "isCtPurchased" (change)="calculatePrice($event)">
+                      Buy Additional Contacts
+                </mat-checkbox>
+            </div>
+        </div>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card>
+        <mat-card-title>
+            Override Total
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <div class="row" style="margin-top:30px;">
+            <div class="col-md-6">
+                <label>Override Total</label>
+                <div class="input-group">
+                    <span class="input-group-addon" style="border:1px solid #ccc;background-color: #eee;padding-left: 12px;">$</span>
+                    <input style="border:1px solid #ccc;padding-left:5px" type="text" [value]="overrideTotal"
+                    (input)="onOverrideTotal($event.target.value)" class="form-control">
+                    <span class="input-group-addon">&nbsp;(U.S. Dollars) </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Notes</label>
+                <textarea class="form-control" [value]="orderNotes"
+                (input)="onOrderNotes($event.target.value)"></textarea>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="row">
+                <div class="col-md-6">
+                <button
+                  style="background-color:#4CAF50"
+                  mat-raised-button
+                  (click)="onContinue()"
+                  color="accent"
+                  type="button"
+                >
+                  Continue<i class="material-icons">arrow_forward</i>
+                </button>
+            </div>
+          </div>
+    </mat-card>
+    </div>
+</div>

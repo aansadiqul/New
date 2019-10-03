@@ -1,0 +1,129 @@
+<div style="position:fixed;z-index:9999;left:50%;top:30%" *ngIf="saving">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="row clearfix">
+  <mat-card >
+    <mat-card-title>
+    {{orderTypeName}}  Order Summary
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <div style="background-color:#4CAF50;color:#fff;padding:15px;margin-top:30px;border-radius:0.5em;">
+        <div style="font-size:18px">Total Order Amount: ${{orderAmount}}</div>
+        <div class="row">
+            <div class="col-md-12">
+              <label>Notes</label>
+              <div>{{orderNotes}}</div>
+            </div>
+        </div>
+    </div>
+
+  </mat-card>
+  <mat-divider></mat-divider>
+  <mat-card>
+    <div *ngIf="isAdmin" style="margin-bottom:20px">
+      <mat-checkbox aria-label="PAY BY CHECK" (change)="$event ? byCheque($event) : null">
+        PAY BY CHECK
+      </mat-checkbox>
+    </div>
+    <mat-card-title *ngIf="!IsCheque">
+      Credit Card Information
+    </mat-card-title>
+    <mat-card-title *ngIf="IsCheque">
+      Pay By Check
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <div *ngIf="!IsCheque" style="margin:30px 0">
+      <form autocomplete="off" #CheckoutCardForm="ngForm"  (ngSubmit)="onSubmit()">
+          <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6 text-left">
+              <label>Name on Card* </label>
+              <input class="form-control" name="name" [(ngModel)]="billingAddressDto.name" required>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6">
+              <label>Card Number </label>
+              <input class="form-control" name="number" [(ngModel)]="creditCardDto.number" required>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+            <div class="col-md-3">
+              <label>Card Expiration </label>
+              <select required class="form-control" name="expiration_month" [(ngModel)]="creditCardDto.expiration_month">
+                <option value="">Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+            <div class="col-md-3 text-left">
+              <label>&nbsp; </label>
+              <select required class="form-control" name="expiration_year" [(ngModel)]="creditCardDto.expiration_year">
+                <option value="">Year</option>
+                <option *ngFor="let month of yearsRange" [value]="month.value">{{month.label}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6">
+              <label>CVV2</label>
+              <input required class="form-control" name="csc" [(ngModel)]="paymentRequestDto.csc">
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6">
+              <label>Street Address*</label>
+              <input required class="form-control" name="street_address" [(ngModel)]="billingAddressDto.street_address">
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+              <div class="col-md-3">
+                  <label>City</label>
+                  <input required class="form-control" name="city" [(ngModel)]="billingAddressDto.city">
+              </div>
+              <div class="col-md-3">
+                  <label>State</label>
+                  <input required class="form-control" name="city" [(ngModel)]="billingAddressDto.state">
+              </div>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6 text-left">
+              <label>Zip/Postal*</label>
+              <input class="form-control" required name="zip" [(ngModel)]="billingAddressDto.zip">
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6 text-left">
+              <label></label>
+              <button type="submit" [disabled]="!CheckoutCardForm.form.valid || saving" style="background-color:#4CAF50;color:#fff" mat-raised-button color="accent">Submit</button>
+            </div>
+          </div>
+      </form>
+    </div>
+    <div *ngIf="IsCheque" style="margin:30px 0">
+      <form autocomplete="off" #CheckoutCheckForm="ngForm"  (ngSubmit)="onCheckSubmit()">
+        <div class="row" style="margin-bottom:10px">
+          <div class="col-md-6">
+            <label>Check Number</label>
+            <input class="form-control" name="checkNumber" [(ngModel)]="checkNumber">
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6 text-left">
+            <label></label>
+            <button type="submit" [disabled]="!CheckoutCheckForm.form.valid || saving" style="background-color:#4CAF50"  mat-raised-button color="accent">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

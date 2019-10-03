@@ -1,0 +1,31 @@
+<div [formGroup]="contactsForm">
+    <div style="padding:15px 20px;background-color:#fff">
+       <div class="row">
+         <div class="col-md-6">
+             <h5>Contacts Title</h5>
+             <mat-radio-group  name="TitleSearchCriteria" formControlName="TitleSearchCriteria" aria-label="Select an option">
+                <mat-radio-button value="INCLUDE" [checked]="true">Include</mat-radio-button>
+                <mat-radio-button value="EXCLUDE">Exclude</mat-radio-button>
+            </mat-radio-group> 
+            <div style="margin-top:10px">
+                  <div *ngFor="let contacttitle of contactTitles;">
+                      <mat-checkbox [checked]="contacttitle.isChecked"  (change)="onChangeContactTitle(contacttitle.name, $event)">{{contacttitle.name}}</mat-checkbox>
+                  </div>            
+            </div>
+         </div>
+         <div class="col-md-6">
+           <h5>Product Lines</h5>
+           <mat-radio-group  name="LinesSearchCriteria" formControlName="LinesSearchCriteria" aria-label="Select an option">
+              <mat-radio-button value="INCLUDE" [checked]="true">Include</mat-radio-button>
+              <mat-radio-button value="EXCLUDE">Exclude</mat-radio-button>
+          </mat-radio-group> 
+          <div style="margin-top:10px">
+                <div *ngFor="let productline of productLines;">
+                    <mat-checkbox [checked]="productline.isChecked"  (change)="onChangeProductLine(productline.name, $event)">{{productline.name}}</mat-checkbox>
+                </div>            
+          </div>
+         </div>
+       </div>
+    </div>
+    
+</div>
