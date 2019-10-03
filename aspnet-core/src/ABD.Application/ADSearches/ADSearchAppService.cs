@@ -196,6 +196,6 @@ namespace ABD.ADSearches
             var bdSearchDetails = ObjectMapper.Map<ADSearchDto>(adSearch);
             return bdSearchDetails;
         }
-    }
+    }//sss
 }
 
