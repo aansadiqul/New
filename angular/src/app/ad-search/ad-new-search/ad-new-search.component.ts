@@ -91,7 +91,7 @@ export class AdNewSearchComponent extends AppComponentBase implements OnInit {
   @ViewChild(AffiliationsComponent) private p_Affiliation: AffiliationsComponent;
   @ViewChild(IndustryComponent) private p_Industry: IndustryComponent;
   @ViewChild(ContactsComponent) private p_Contacts: ContactsComponent;
-
+  @ViewChild('fieldName1') fieldName1;
   constructor(injector: Injector,
     public _adService: ADSearchServiceProxy,
     private route: ActivatedRoute,
@@ -215,6 +215,7 @@ export class AdNewSearchComponent extends AppComponentBase implements OnInit {
           }
           else {
             //  this.saving = true;
+            this.fieldName1.nativeElement.focus();
           }
         }
       );
